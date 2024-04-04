@@ -1,0 +1,113 @@
+.sidebar {
+	height: calc(100% - 6rem);
+	width: 6.5rem;
+	background-color: $primary-dark-color;
+	position: relative;
+	z-index: 5;
+}
+
+.navigation {
+	&__list {
+	}
+
+	&__item {
+		text-align: center;
+		padding: 1rem 0;
+		background-color: $primary-dark-color;
+		transition: all 0.2s;
+	}
+
+	&__item:hover {
+		background-color: $primary-light-color;
+
+		.sub-navigation {
+			display: block;
+		}
+	}
+
+	&__item.active {
+		background-color: $primary-light-color;
+	}
+
+	&__item:hover &__link {
+		.fa {
+			color: $primary-dark-color;
+			background-color: $white-color;
+		}
+	}
+
+	&__item.active &__link {
+		.fa {
+			color: $primary-dark-color;
+			background-color: $white-color;
+		}
+	}
+
+	&__link {
+		.fa {
+			display: inline-block;
+			background-color: $primary-light-color;
+			width: 3.5rem;
+			height: 3.5rem;
+			@include flex();
+			margin: auto;
+			border-radius: 50%;
+			color: #fff;
+			font-size: 1.6rem;
+		}
+
+		span {
+			color: $white-color;
+			font-size: 1rem;
+			text-transform: capitalize;
+		}
+	}
+}
+
+.sub-navigation {
+	position: fixed;
+	background: $primary-light-color;
+	top: 6rem;
+	left: 6.5rem;
+	width: 300px;
+	bottom: 0;
+	overflow-y: auto;
+	overflow-x: hidden;
+	display: none;
+
+	&__item {
+	}
+
+	&__link {
+		width: 100%;
+		display: inline-block;
+		padding: 0.8rem 1.5rem;
+		@include flex(flex-start);
+
+		&:hover {
+			background: $primary-dark-color;
+		}
+
+		.fa {
+			display: inline-block;
+			background-color: $white-color;
+			width: 2.5rem;
+			height: 2.5rem;
+			@include flex();
+			border-radius: 50%;
+			color: $primary-light-color;
+			font-size: 1.4rem;
+			margin-right: 1rem;
+		}
+
+		span {
+			color: $white-color;
+			font-size: 1rem;
+			text-transform: capitalize;
+		}
+	}
+
+	&__item.active &__link {
+		background: $primary-dark-color;
+	}
+}

@@ -1,0 +1,101 @@
+%base-button-class {
+	width: 35px;
+	height: 35px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	background-color: $primary-light-color;
+	flex-shrink: 0;
+}
+
+%button-styles {
+	.dropdown-menu {
+		background-color: $primary-light-color;
+		box-shadow: $shadow-light;
+		max-width: 15rem;
+	}
+
+	.dropdown-item {
+		font-size: 1.2rem;
+		color: $white-color;
+
+		@include singleLineClamp;
+	}
+
+	.dropdown-item:focus,
+	.dropdown-item:hover {
+		color: #1e2125;
+	}
+}
+
+.notification {
+	@extend %base-button-class;
+
+	.dropdown-toggle {
+		background-color: transparent;
+
+		&::after {
+			display: none;
+		}
+	}
+
+	.fa {
+		color: $white-color;
+		font-size: 1.6rem;
+	}
+
+	&__counter {
+		background-color: orange;
+		position: absolute;
+		right: -30%;
+		top: -15%;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 22px;
+		height: 22px;
+		color: $white-color;
+		font-weight: bold;
+		font-size: 1.2rem;
+	}
+
+	@extend %button-styles;
+
+	.btn.btn-sm {
+		font-size: 1.2rem;
+	}
+}
+
+.user-dropdown {
+	.dropdown-toggle {
+		@include flex();
+	}
+
+	&__icon {
+		width: 35px;
+		height: 35px;
+		@include flex();
+		border-radius: 50%;
+		background-color: $primary-light-color;
+		margin-right: 0.5rem;
+
+		.fa-user {
+			color: $white-color;
+			font-size: 1.6rem;
+		}
+	}
+
+	@extend %button-styles;
+}
+
+.language {
+	&__figure {
+		width: 2.5rem;
+		border-radius: 3px;
+		margin-right: 5px;
+	}
+
+	@extend %button-styles;
+}

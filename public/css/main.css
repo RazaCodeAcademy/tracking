@@ -1,0 +1,912 @@
+@charset "UTF-8";
+/*
+sass 7–1 pattern/
+|
+|– abstracts/ (or utilities/)
+|   |– _variables.scss    // Sass Variables
+|   |– _functions.scss    // Sass Functions
+|   |– _mixins.scss       // Sass Mixins
+|
+|– base/
+|   |– _base.scss         // Reset/normalize
+|   |– _typography.scss   // Typography rules
+|   |– _utilities.scss    // Utility/helper rules
+|   |– _animations.scss   // Animation rules
+|
+|– components/ (or modules/)
+|   |– _buttons.scss      // Buttons
+|   |– _carousel.scss     // Carousel
+|   |– _slider.scss       // Slider
+|
+|– layout/
+|   |– _navigation.scss   // Navigation
+|   |– _grid.scss         // Grid system
+|   |– _header.scss       // Header
+|   |– _footer.scss       // Footer
+|   |– _sidebar.scss      // Sidebar
+|   |– _forms.scss        // Forms
+|
+|– pages/
+|   |– _home.scss         // Home specific styles
+|   |– _about.scss        // About specific styles
+|   |– _contact.scss      // Contact specific styles
+|
+|– themes/
+|   |– _theme.scss        // Default theme
+|   |– _admin.scss        // Admin theme
+|
+|– vendors/
+|   |– _bootstrap.scss    // Bootstrap
+|   |– _jquery-ui.scss    // jQuery UI
+|
+`– main.scss              // Main Sass file
+*/
+/*
+
+0 - 600      => 37.5em      Phone
+600 - 992    => 62em        Tablet (portrait)
+992 - 1200   => 75em        Tablet (landscape)
+1200 - 1800  => 112.5em     Desktop style
+1800+        => 112.5em     Big desktop
+
+$breakpoint argument choices
+- phone
+- tab-port
+- tab-land
+- desktop
+- big-desktop
+
+when user changes the default fontsize in the browsers our mediaquery with px are not effected
+In media queries when using em or rems both units take root font size from browser which is 16px
+but not takes root font size that we set earlier in the html selector definition
+here we're using ems because rems have some issues in different browsers when used in media qureies
+so 1em = 16px which is the browser's root font size
+so 
+media-query-px / root-size-browser => 600px/16px = 37.5em
+
+*/
+.form-control {
+    padding: 0.42rem 0.75rem;
+}
+
+.page-link {
+    color: #af3b41;
+}
+
+.page-link:focus {
+    z-index: 3;
+    color: #fff;
+    background-color: #af3b41;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(175, 59, 65, 0.25);
+}
+
+.page-link:hover {
+    color: #af3b41;
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+}
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #fff;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #af3b41;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #892e34;
+}
+
+html {
+    height: 100%;
+    font-size: 62.5%;
+}
+@media only screen and (min-width: 112.5em) {
+    html {
+        font-size: 75%;
+    }
+}
+@media only screen and (max-width: 75em) {
+    html {
+        font-size: 56.2%;
+    }
+}
+@media only screen and (max-width: 62em) {
+    html {
+        font-size: 50%;
+    }
+}
+@media only screen and (max-width: 37.5em) {
+    html {
+        font-size: 50%;
+    }
+}
+
+body {
+    box-sizing: border-box;
+    list-style: none;
+    font-size: 1.2rem;
+    height: 100%;
+    overflow: hidden;
+}
+
+a {
+    text-decoration: none;
+}
+a:hover,
+a:active {
+    text-decoration: none;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+figure {
+    margin: 0;
+}
+
+button {
+    border: none;
+}
+button:focus {
+    outline: none;
+}
+
+.bg-primary-dark {
+    background: #892e34;
+}
+
+.opacity-50 {
+    opacity: 0.5;
+}
+
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #af3b41;
+    border-color: #af3b41;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(120, 119, 119, 0.749);
+    display: none;
+    z-index: 9999;
+}
+
+.obj-menu-bg {
+    background-color: #af3b41;
+    color: white;
+}
+.obj-menu-bg > li {
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.56);
+}
+.obj-menu-bg > li > a {
+    color: white;
+}
+.obj-menu-bg > li > a:hover {
+    background-color: white;
+    color: #af3b41;
+}
+
+.spinner-container {
+    position: relative;
+    height: 100vh;
+}
+
+.spinner {
+    border: 8px solid rgba(255, 255, 255, 0.3);
+    border-left: 8px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 10000;
+    display: none;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+.dropdown-menu li {
+    position: relative;
+}
+.dropdown-menu .dropdown-submenu {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: -7px;
+}
+.dropdown-menu .dropdown-submenu-left {
+    right: 100%;
+    left: auto;
+}
+.dropdown-menu > li:hover > .dropdown-submenu {
+    display: block;
+}
+
+.header {
+    background-color: #efefef;
+    height: 6rem;
+    border-bottom: 3px solid #892e34;
+    display: flex;
+    align-items: center;
+}
+.header__logo {
+    height: 3rem;
+}
+
+.user-info {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+/* @keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+} */
+
+.cluster-icon-img {
+    width: 30px; /* Set the width of the image */
+    height: 30px; /* Set the height of the image */
+}
+
+.cluster-count {
+    font-size: 11px;
+    margin-top: 10px;
+    margin-left: 15px;
+    color: white;
+    padding: 1px 5px;
+    border-radius: 5px;
+    background-color: rgb(14, 159, 220);
+}
+
+.rotated-marker {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    position: absolute;
+    transform-origin: center center;
+}
+
+.arrow img {
+    width: 20px;
+    height: 100%;
+    object-fit: cover;
+    transform: rotate(0deg);
+}
+
+.nav-tabs .nav-link {
+    color: #892e34;
+}
+.nav-tabs .active {
+    background-color: #892e34 !important;
+    color: white !important;
+}
+
+/* Map container styling */
+.map-container {
+    position: fixed;
+    width: 100%;
+    height: 100vh; /* Adjust the height as needed */
+}
+
+/* Map styling */
+#map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Ensure the map is on top */
+}
+
+.theme-btn {
+    background-color: #892e34;
+    color: white;
+    padding: 8px 10px;
+    font-size: 12px;
+    border-radius: 5px;
+}
+
+.theme-btn:hover {
+    background-color: #772b30;
+}
+
+.theme-search-btn {
+    background-color: #892e34;
+    color: white;
+    padding: 3px 7px;
+    font-size: 11px;
+    border-radius: 3px;
+}
+
+.theme-search-btn:hover {
+    background-color: #772b30;
+}
+
+.sidebar {
+    height: calc(100% - 6rem);
+    width: 6.5rem;
+    background-color: #892e34;
+    position: fixed;
+    z-index: 5;
+}
+
+.navigation__item {
+    text-align: center;
+    padding: 1rem 0;
+    background-color: #892e34;
+    transition: all 0.2s;
+}
+.navigation__item:hover {
+    background-color: #af3b41;
+}
+.navigation__item:hover .sub-navigation {
+    display: block;
+}
+.navigation__item.active {
+    background-color: #af3b41;
+}
+.navigation__item:hover .navigation__link .fa {
+    color: #892e34;
+    background-color: #fff;
+}
+.navigation__item.active .navigation__link .fa {
+    color: #892e34;
+    background-color: #fff;
+}
+.navigation__link .fa {
+    display: inline-block;
+    background-color: #af3b41;
+    width: 3.5rem;
+    height: 3.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 1.6rem;
+}
+.navigation__link span {
+    color: #fff;
+    font-size: 1rem;
+    text-transform: capitalize;
+}
+
+/* Example CSS for styling the header and content */
+.notification-header {
+    font-weight: bold;
+    color: #ffffff; /* You can customize the color */
+    background-color: #892e34;
+    padding: 5px;
+    width: 100%;
+    font-size: 14px;
+}
+
+.notification-content {
+    /* margin-top: 10px; */
+    padding: 10px;
+    color: #892e34;
+    background-color: white;
+    font-size: 11px;
+}
+
+.sub-navigation {
+    position: fixed;
+    background: #af3b41;
+    top: 6rem;
+    left: 6.5rem;
+    width: 300px;
+    bottom: 0;
+    overflow: auto;
+    overflow-x: hidden;
+    display: none;
+}
+.sub-navigation__link {
+    width: 100%;
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.sub-navigation__link:hover {
+    background: #892e34;
+}
+.sub-navigation__link .fa {
+    display: inline-block;
+    background-color: #fff;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color: #af3b41;
+    font-size: 1.4rem;
+    margin-right: 1rem;
+}
+.sub-navigation__link span {
+    color: #fff;
+    font-size: 1rem;
+    text-transform: capitalize;
+}
+.sub-navigation__item.active .sub-navigation__link {
+    background: #892e34;
+}
+
+.bottom-bar {
+    position: fixed;
+    left: 6.5rem;
+    bottom: 0;
+    right: 0;
+    border-top: 1px solid #af3b41;
+    transform: translateY(100%);
+    transition: transform 0.3s ease-out;
+    z-index: 1;
+}
+.bottom-bar.show {
+    transform: translateY(0);
+}
+.bottom-bar__toggler {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #af3b41;
+    cursor: pointer;
+    height: 25px;
+    margin-top: -10px;
+    position: absolute;
+    right: 50%;
+    top: -16px;
+    width: 30px;
+}
+.bottom-bar__toggler .fa-sort-desc {
+    pointer-events: none;
+    margin-top: 8px;
+    transform: rotateZ(180deg);
+    transition: transform 0.3s ease-out;
+}
+.bottom-bar__toggler.active .fa-sort-desc {
+    margin-top: -5px;
+    transform: rotateZ(0deg);
+}
+.bottom-bar__tab {
+    padding: 10px 10px 5px;
+    height: 150px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.bottom-bar__widget {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+}
+.bottom-bar__widget i {
+    margin-right: 0.5rem;
+}
+.bottom-bar__widget span {
+    font-weight: bold;
+    font-size: 1rem;
+}
+.bottom-bar__widget input {
+    margin-left: auto;
+}
+.bottom-bar__white-space {
+    width: 450px;
+}
+.bottom-bar__tracking {
+    flex: 1;
+}
+.bottom-bar .nav-tabs .nav-link.active {
+    color: #fff;
+    background-color: #892e34;
+    border-color: #892e34;
+}
+.bottom-bar .nav-tabs .nav-link {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.bottom-bar .nav-link {
+    padding: 2px 10px;
+    color: #000;
+    font-size: 15px;
+}
+.bottom-bar .nav-tabs {
+    background: #fff;
+    border-bottom: 1px solid #dee2e6;
+}
+.bottom-bar .tab-content {
+    background: #efefef;
+}
+
+.tracking-sidebar {
+    position: absolute;
+    left: 6.5rem;
+    background: #fff;
+    top: 6rem;
+    bottom: 0;
+    z-index: 2;
+    width: 450px;
+    transition: all ease-in-out 0.3s;
+    border: 1px solid;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+}
+.tracking-events-sidebar {
+    position: absolute;
+    right: 0rem;
+    background: #fff;
+    top: 6rem;
+    bottom: 0;
+    z-index: 2;
+    width: 450px;
+    transition: all ease-in-out 0.3s;
+    border: 1px solid;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+}
+
+.tracking-events-sidebar.show {
+    transform: translateX(0%);
+}
+.tracking-sidebar.show {
+    transform: translateX(-100%);
+}
+.tracking-events-sidebar__grid {
+    margin: 0;
+    display: flex;
+    justify-content: left;
+    align-items: left;
+}
+.tracking-sidebar__grid {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.tracking-sidebar__form {
+    flex: 1;
+    margin-right: 0.5rem;
+}
+.tracking-sidebar__tracklist {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.tracking-sidebar__tracklist > *:not(:last-child) {
+    margin-right: 0.5rem;
+}
+.tracking-sidebar__footer {
+    padding-top: 1rem;
+}
+.ts-table-width{
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Prevent text from wrapping */
+    max-width: 100%; /* Ensure the div doesn't expand beyond its parent */
+    cursor: grab; /* Change cursor to indicate draggable content */
+}
+.ts-table-width::-webkit-scrollbar {
+    display: none; /* Hide the scrollbar */
+}
+.tracking-sidebar__table thead {
+    background-color: #892e34;
+    color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+.tracking-sidebar__content {
+    transition: all 0.2s;
+}
+.tracking-sidebar__content:hover {
+    background-color: #af3b41;
+    color: #fff;
+}
+.tracking-sidebar__content th,
+.tracking-sidebar__content td {
+    vertical-align: middle;
+}
+.tracking-sidebar__content th {
+    border-right: 1px solid #dee2e6;
+}
+.tracking-sidebar__content td:not(:last-child) {
+    border-right: 1px solid #dee2e6;
+}
+.tracking-events-sidebar__content {
+    transition: all 0.2s;
+}
+.tracking-events-sidebar__content:hover {
+    background-color: #af3b41;
+    color: #fff;
+}
+.tracking-events-sidebar__content th,
+.tracking-events-sidebar__content td {
+    vertical-align: middle;
+}
+.tracking-events-sidebar__content th {
+    border-right: 1px solid #dee2e6;
+}
+.tracking-events-sidebar__content td:not(:last-child) {
+    border-right: 1px solid #dee2e6;
+}
+.tracking-sidebar__inner {
+    flex: 1;
+    overflow-y: scroll;
+    height: 90vh;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+.track {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #892e34;
+    cursor: pointer;
+    color: #fff;
+    height: 2.5rem;
+    width: 2.5rem;
+    transition: all ease-in-out 0.3s;
+}
+.track:hover {
+    background: #af3b41;
+    color: #fff;
+}
+.track-toggle-sidebar {
+    position: absolute;
+    top: 5px;
+    right: 0;
+    transform: translateX(120%);
+    transition: all ease-in-out 0.5s;
+}
+.track-events-toggle-sidebar {
+    position: absolute;
+    top: 5px;
+    left: 0;
+    transform: translateX(-120%);
+    transition: all ease-in-out 0.5s;
+}
+.track__map-controls {
+    border-bottom: 1px solid #fff;
+}
+.track-toggle-sidebar.rotate .fa {
+    transform: rotate(180deg);
+}
+
+.track-events-toggle-sidebar.rotate .fa {
+    transform: rotate(180deg);
+}
+
+.map__control-bar {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    transform: translateX(120%);
+}
+
+.tracking-badge {
+    display: inline-flex;
+    margin-right: 5px;
+    width: 2rem;
+    height: 2rem;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background-color: #000;
+    color: #fff;
+}
+.tracking-badge--warn {
+    background: linear-gradient(
+        to bottom,
+        #b73838 1%,
+        #e5494c 53%,
+        #ff3236 100%
+    );
+}
+
+.tracking-status {
+    display: inline-block;
+    border-radius: 50%;
+    width: 1.2rem;
+    height: 1.2rem;
+    background: linear-gradient(315deg, #da20cb 0%, #6e45e1 74%);
+}
+
+.single-line {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 210px;
+}
+
+.notification {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #af3b41;
+    flex-shrink: 0;
+}
+
+.notification .dropdown-menu,
+.user-dropdown .dropdown-menu,
+.language .dropdown-menu {
+    background-color: #af3b41;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.19),
+        0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    max-width: 15rem;
+}
+.notification .dropdown-item,
+.user-dropdown .dropdown-item,
+.language .dropdown-item {
+    font-size: 1.2rem;
+    color: #fff;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.notification .dropdown-item:focus,
+.user-dropdown .dropdown-item:focus,
+.language .dropdown-item:focus,
+.notification .dropdown-item:hover,
+.user-dropdown .dropdown-item:hover,
+.language .dropdown-item:hover {
+    color: #1e2125;
+}
+
+.notification .dropdown-toggle {
+    background-color: transparent;
+}
+.notification .dropdown-toggle::after {
+    display: none;
+}
+.notification .fa {
+    color: #fff;
+    font-size: 1.6rem;
+}
+.notification__counter {
+    background-color: orange;
+    position: absolute;
+    right: -30%;
+    top: -15%;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+.notification .btn.btn-sm {
+    font-size: 1.2rem;
+}
+
+.user-dropdown .dropdown-toggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.user-dropdown__icon {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: #af3b41;
+    margin-right: 0.5rem;
+}
+.user-dropdown__icon .fa-user {
+    color: #fff;
+    font-size: 1.6rem;
+}
+
+.language__figure {
+    width: 2.5rem;
+    border-radius: 3px;
+    margin-right: 5px;
+}
+
+.popup {
+    display: none;
+    position: absolute;
+    top: 35%;
+    left: 0;
+    z-index: 1;
+    transform: translateX(-100%);
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 4px;
+    color: black !important;
+    font-size: 11px;
+    line-height: 10px;
+}
+
+/*
+
+Abstracts (or utilities): holds Sass tools, helper files, variables, functions, mixins and other config files.
+These files are meant to be just helpers which don’t output any CSS when compiled.
+
+Base: holds the boilerplate code for the project. Including standard styles such as resets and typographic rules,
+which are commonly used throughout your project.
+
+Components (or modules): holds all of your styles for buttons, carousels, sliders, and similar page components 
+(think widgets). Your project will typically contain a lot of component files — as the whole site/app should
+be mostly composed of small modules.
+
+Layout: contains all styles involved with the layout of your project. Such as styles for your header,
+footer, navigation and the grid system.
+
+Pages: any styles specific to individual pages will sit here. For example it’s not uncommon for the home page
+of your site to require page specific styles that no other page receives.
+
+Themes: this is likely not used in many projects. It would hold files that create project specific themes.
+For example if sections of your site contain alternate color schemes.
+
+Vendors: contains all third party code from external libraries and frameworks — such as Normalize, 
+Bootstrap, jQueryUI, etc. However, there is often a need to override vendor code. If this is required, 
+its good practice to create a new folder called vendors-extensions/ and then name any files after the 
+vendors they overwrite. The filevendors-extensions/_bootstrap.scss would contain all your Bootstrap 
+overrides — as editing the vendor files themselves, isn’t generally a good idea.
+
+Main.scss: This file should only contain your imports!
+
+*/
+
+/*# sourceMappingURL=main.css.map */

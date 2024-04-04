@@ -1,0 +1,147 @@
+.tracking-portion {
+}
+
+.tracking-sidebar {
+	position: absolute;
+	left: 6.5rem;
+	background: #fff;
+	top: 6rem;
+	bottom: 0;
+	z-index: 1;
+	width: 450px;
+	transition: all ease-in-out 0.3s;
+	border: 1px solid;
+	padding: 5px;
+
+	display: flex;
+	flex-direction: column;
+
+	&.show {
+		transform: translateX(-100%);
+	}
+
+	&__grid {
+		margin: 0;
+		@include flex();
+	}
+
+	&__form {
+		flex: 1;
+		margin-right: 0.5rem;
+	}
+
+	&__tracklist {
+		@include flex();
+
+		@include selectAllExceptLast {
+			margin-right: 0.5rem;
+		}
+	}
+
+	&__footer {
+		padding-top: 1rem;
+	}
+
+	&__table {
+		thead {
+			background-color: $primary-dark-color;
+			color: $white-color;
+		}
+	}
+
+	&__content {
+		transition: all 0.2s;
+
+		&:hover {
+			background-color: $primary-light-color;
+			color: $white-color;
+		}
+
+		th,
+		td {
+			vertical-align: middle;
+		}
+
+		th {
+			border-right: 1px solid #dee2e6;
+		}
+
+		td {
+			@include notLastChild {
+				border-right: 1px solid #dee2e6;
+			}
+		}
+	}
+
+	&__inner {
+		flex: 1;
+		overflow: auto;
+	}
+}
+
+.track {
+	@include flex();
+	background: $primary-dark-color;
+	cursor: pointer;
+	color: $white-color;
+	height: 2.5rem;
+	width: 2.5rem;
+	transition: all ease-in-out 0.3s;
+
+	&:hover {
+		background: $primary-light-color;
+		color: $white-color;
+	}
+
+	&-toggle-sidebar {
+		position: absolute;
+		top: 5px;
+		right: 0;
+		transform: translateX(120%);
+		transition: all ease-in-out 0.5s;
+	}
+
+	&__map-controls {
+		border-bottom: 1px solid $white-color;
+	}
+
+	&-toggle-sidebar.rotate .fa {
+		transform: rotate(180deg);
+	}
+}
+
+.map {
+	&__control-bar {
+		position: absolute;
+		top: 40px;
+		right: 0;
+		transform: translateX(120%);
+	}
+
+	&__controls {
+	}
+}
+
+.tracking-badge {
+	display: inline-flex;
+	margin-right: 5px;
+	width: 2rem;
+	height: 2rem;
+	justify-content: center;
+	align-items: center;
+	border-radius: 5px;
+	background-color: $black-color;
+	color: $white-color;
+
+	&--warn {
+		background: linear-gradient(to bottom, #b73838 1%, #e5494c 53%, #ff3236 100%);
+	}
+}
+
+.tracking-status {
+	display: inline-block;
+	border-radius: 50%;
+	width: 1.2rem;
+	height: 1.2rem;
+	background: linear-gradient(315deg, #da20cb 0%, #6e45e1 74%);
+}
