@@ -25,7 +25,7 @@ $(document).ready(function () {
                                 <span class="tracking-badge">
                                     <i class="fa fa-eye-slash" aria-hidden="true"></i>
                                 </span>
-                                ${data[4]}faafafafasfasfas afasfasfasf
+                                ${data[4]}
                             </p>
                             <div class="text-right">
                                 <span>${data[37] ? data[37] : 0}kph</span>
