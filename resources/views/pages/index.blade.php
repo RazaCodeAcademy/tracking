@@ -29,7 +29,7 @@
         setTimeout(() => {
             // displaySpinner();
             ele('search').value = '';
-            
+
             objectPlotting(true);
             getEventsData();
             // console.log('onload settimeout working');
@@ -166,6 +166,7 @@
 
                 if (data.length > 0) {
                     // console.log(data.length);
+                    data.sort((a, b) => new Date(b.dt_tracker) - new Date(a.dt_tracker));
                     global.eventsData = data;
                     global.event_last_id = data[data.length - 1].event_id;
                     var html = '';
@@ -204,20 +205,21 @@
         // send message data api to the whatsapp
         const sendMessage = async () => {
             try {
+                let to = ele('event-send-to').value;
                 let message = ele('event-message').value;
                 const response = await $.ajax({
-                    url: `{{ route('sendMessage') }}`,
+                    url: `{{ route('sendMessages') }}`,
                     type: "POST",
                     data:{
                         message: message,
-                        id: global.groupList[0].id,
+                        to: to,
                         last_id: global.resolveEventId
                     }
                 });
 
-                
+
                 var data = response ? JSON.parse(response) : null;
-                
+
                 if (data) {
                     ele('message-event').click();
                     ele(global.resolveEventId).remove();

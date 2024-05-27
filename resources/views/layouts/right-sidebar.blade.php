@@ -69,9 +69,9 @@
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <label for="">Phone Number</label>
-                                                    <input type="text" id="group-id" class="form-control">
+                                                    <input type="text" id="event-send-to" class="form-control">
                                                 </div>
-                                                
+
                                             </div>
                                             <div class="col-12">
                                                 <div class="form-group">

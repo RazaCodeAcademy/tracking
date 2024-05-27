@@ -67,11 +67,11 @@
                 <div class="row align-items-center justify-content-center">
                     <div class="col-md-11">
                         <div class="mb-5 d-flex justify-content-center align-items-center">
-                            <img src="{{ asset('public/img/appIcon.png') }}" width="130" alt="">
+                            <img src="{{ asset('public/img/appIcon.png') }}" width="330" alt="">
                         </div>
-                        <h3>Login to <strong>Alphatraccia</strong></h3>
-                        <p class="mb-4">Lorem ipsum dolor sit amet elit. Sapiente sit aut eos consectetur adipisicing.
-                        </p>
+                        <h3>Login to <strong>Digitrack</strong></h3>
+                        <!--<p class="mb-4">Lorem ipsum dolor sit amet elit. Sapiente sit aut eos consectetur adipisicing.-->
+                        <!--</p>-->
                         <form action="{{ route('post.login') }}" method="post">
                             <div class="form-group first">
                                 <label for="username">Username</label>
@@ -96,8 +96,8 @@
 
                         </form>
                     </div>
-                    <a href="http://gps.alphatraccia.com/"
-                        style="position: absolute; bottom: 10px; right: 10%;">www.gps.alphatraccia.com</a>
+                    <a href="https://track.digitrackgps.com/"
+                        style="position: absolute; bottom: 10px; right: 10%;">www.track.digitrackgps.com/</a>
                 </div>
             </div>
         </div>

@@ -15,7 +15,7 @@ Route::get('/clear', function(){
 //     return view('pages.login');
 // })->name('login');
 Route::get('/', 'LoginController@getLoginPage')->name('login');
-Route::post('/login', 'LoginController@index')->name('post.login');
+Route::post('/user-login', 'LoginController@index')->name('post.login');
 Route::get('/get-onload-data', 'DashboardController@index')->name('settings.object');
 Route::get('/get-onload-data', 'DashboardController@getOnLoadData')->name('getOnLoadData');
 Route::get('/get-object', 'DashboardController@getObjects')->name('getObjects');
@@ -23,7 +23,7 @@ Route::get('/get-object-history', 'DashboardController@getObjectHistory')->name(
 Route::get('/get-events-list', 'DashboardController@getEventsList')->name('getEventsList');
 Route::get('/resolve-event', 'DashboardController@resolveEvent')->name('resolveEvent');
 Route::get('/get-group-list', 'DashboardController@getGroupList')->name('getGroupList');
-Route::post('/send-message', 'DashboardController@sendMessage')->name('sendMessage');
+Route::post('/send-message', 'DashboardController@sendMessage')->name('sendMessages');
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 

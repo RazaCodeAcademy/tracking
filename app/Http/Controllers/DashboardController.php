@@ -22,7 +22,7 @@ class DashboardController extends Controller
         if(!$this->PHPSESSID){
             $this->setCookieSession();
         }
-        
+
         $this->PHPSESSID = session('PHPSESSID');
     }
     /**
@@ -113,7 +113,7 @@ class DashboardController extends Controller
     }
 
     public function getObjects()
-    {  
+    {
         $cacheName = $this->PHPSESSID.'_fn_objects';
         // Check if the data is already cached
         if (Cache::has($cacheName) && !request()->ajax()) {
@@ -323,7 +323,7 @@ class DashboardController extends Controller
 
             // Loop through each line
             foreach ($lines as $line) {
-                
+
                 // Split the line into fields
                 $fields = explode("\t", $line);
 
@@ -422,14 +422,24 @@ class DashboardController extends Controller
 
     public function sendMessage(Request $request)
     {
-        $params=array(
-            'token' => 'ocp6656rjfypu760',
-            'to' => $request->id,
-            'body' => $request->message
-        );
+        $to = $request->to;
+        $clientId = "eyJpZCI6Ik1GVU1PTUpwYjJKd3hTS0ZZSURmaFVFM3RlZzZESEpZIiwiY2xpZW50X2lkIjoicmF6YSJ9";
+        $token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJNRlVNT01KcGIySnd4U0tGWUlEZmhVRTN0ZWc2REhKWSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzE2MjIzMTY1fQ.cuf9pb82nePCOwg1dovSnyyW2pcVrYgy-l2ulOm_aYo";
+        $clientId = urlencode($clientId);
+        $token = urlencode($token);
+        $to = urlencode($to);
+        $text = $request->message;
+        $text = urlencode($text);
+
+        $params = "client_id=$clientId&text=$text&token=$token&to=$to";
+
+        // }
+        // $url = "http://127.0.0.1:8001/api/send-message/chat?$params";
+        $url = "https://msg.alphaxcloud.com/api/send-message/chat?$params";
+        // return "https://msg.alphaxcloud.com/api/send-message/chat?".$params;
         $curl = curl_init();
-            curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.ultramsg.com/instance81487/messages/chat",
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -437,11 +447,10 @@ class DashboardController extends Controller
             CURLOPT_SSL_VERIFYHOST => 0,
             CURLOPT_SSL_VERIFYPEER => 0,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => http_build_query($params),
-            CURLOPT_HTTPHEADER => array(
-                "content-type: application/x-www-form-urlencoded"
-            ),
+            CURLOPT_CUSTOMREQUEST => "GET",
+            // CURLOPT_HTTPHEADER => array(
+            //     "content-type: application/x-www-form-urlencoded"
+            // ),
         ));
 
         $response = curl_exec($curl);

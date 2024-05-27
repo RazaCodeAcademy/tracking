@@ -7,27 +7,27 @@ const eventSidebarToggler = document.querySelector(".track-events-toggle-sidebar
 const eventSidebar = document.querySelector(".tracking-events-sidebar");
 
 toggler.addEventListener("click", (e) => {
-	e.target.classList.toggle("active");
-	bottomBar.classList.toggle("show");
+    e.target.classList.toggle("active");
+    bottomBar.classList.toggle("show");
 });
 
 sidebarToggler.addEventListener("click", (e) => {
-	sidebarToggler.classList.toggle("rotate");
-	sidebar.classList.toggle("show");
+    sidebarToggler.classList.toggle("rotate");
+    sidebar.classList.toggle("show");
 });
 
 eventSidebarToggler.addEventListener("click", (e) => {
-	eventSidebarToggler.classList.toggle("rotate");
-	eventSidebar.classList.toggle("show");
+    eventSidebarToggler.classList.toggle("rotate");
+    eventSidebar.classList.toggle("show");
 });
 
 const appendEventData = (data, index) => {
-	global.last_events_data[data.event_id] = data;
-	var notify_system = data.notify_system.split(',');
-	if (notify_system[0] == true) {
-		displayToasterMessages(data, index, notify_system[1]);
-	}
-	return `<tr class="tracking-events-sidebar__content cursor" onclick="showEvent(${data.event_id})" id="${data.event_id}">
+    global.last_events_data[data.event_id] = data;
+    var notify_system = data.notify_system.split(',');
+    if (notify_system[0] == true) {
+        displayToasterMessages(data, index, notify_system[1]);
+    }
+    return `<tr class="tracking-events-sidebar__content cursor" onclick="showEvent(${data.event_id})" id="${data.event_id}">
 		<td>
 			${data.dt_tracker}
 		</td>
@@ -53,32 +53,32 @@ const appendEventData = (data, index) => {
 }
 
 const checkDataLength = (data) => {
-	var len = data.length;
-	if (len == 8) { // events
-		return [
-			icons.routeEvent,
-			data[1],
-			data[4],
-		]
-	}
-	else if (len == 13) { // stops
-		return [
-			icons.routeStop,
-			data[6],
-			data[8],
-		]
-	} else if (len == 15) { //drives
-		return [
-			icons.routeStart,
-			data[4],
-			data[6],
-		]
-	}
+    var len = data.length;
+    if (len == 8) { // events
+        return [
+            icons.routeEvent,
+            data[1],
+            data[4],
+        ]
+    }
+    else if (len == 13) { // stops
+        return [
+            icons.routeStop,
+            data[6],
+            data[8],
+        ]
+    } else if (len == 15) { //drives
+        return [
+            icons.routeStart,
+            data[4],
+            data[6],
+        ]
+    }
 }
 
 const appendHistoryData = (data, index) => {
-	data = checkDataLength(data);
-	return `<tr class="tracking-events-sidebar__content cursor" onmouseover="showPopup(${index})" onmouseout="hidePopup(${index})" onclick="showEvent()">
+    data = checkDataLength(data);
+    return `<tr class="tracking-events-sidebar__content cursor" onmouseover="showPopup(${index})" onmouseout="hidePopup(${index})" onclick="showEvent()">
 		<td>
 			<div class="popup" id="popup-${index}">
 				<p>Route Length: ${index}</p>
@@ -104,55 +104,55 @@ const appendHistoryData = (data, index) => {
 }
 
 const getHistoryData = () => {
-	let imei = ele('imei').value;
-	let filter = ele('filter').value;
-	let time_from = ele('time_from').value;
-	let time_to = ele('time_to').value;
-	let stops = ele('stops').value;
-	if (filter) {
-		calculateTimeRange(imei, filter, stops);
-	} else {
-		var data = {
-			cmd: 'load_route_data',
-			imei: imei,
-			msd: stops,
-			dtf: time_from,
-			dtt: time_to
-		}
-		getObjectHistoryData(data);
-	}
+    let imei = ele('imei').value;
+    let filter = ele('filter').value;
+    let time_from = ele('time_from').value;
+    let time_to = ele('time_to').value;
+    let stops = ele('stops').value;
+    if (filter) {
+        calculateTimeRange(imei, filter, stops);
+    } else {
+        var data = {
+            cmd: 'load_route_data',
+            imei: imei,
+            msd: stops,
+            dtf: time_from,
+            dtt: time_to
+        }
+        getObjectHistoryData(data);
+    }
 }
 
 const showEvent = (id) => {
-	var event = global.last_events_data[id];
-	if (global.oldEventMarker) {
-		global.map.removeLayer(global.oldEventMarker);
-	}
-	if (event) {
-		var marker = L.marker([event.lat, event.lng], {
-			icon: global.routeEvent,
-			title: event.name,
-		});
+    var event = global.last_events_data[id];
+    if (global.oldEventMarker) {
+        global.map.removeLayer(global.oldEventMarker);
+    }
+    if (event) {
+        var marker = L.marker([event.lat, event.lng], {
+            icon: global.routeEvent,
+            title: event.name,
+        });
 
-		marker.bindPopup(
-			'<b>Object</b> :  ' + event.name +
-			'<br><b>Event</b> :  ' + event.event_desc +
-			'<br><b>Address</b> :  ' + '' +
-			'<br><b>Position</b> :  ' + event.lat + ', ' + event.lng +
-			'<br><b>Altitude</b> :  ' + event.altitude +
-			'<br><b>Angle</b> :  ' + event.angle +
-			'<br><b>Speed</b> :  ' + event.speed + ' KM' +
-			'<br><b>Time</b> :  ' + event.dt_tracker
-		);
+        marker.bindPopup(
+            '<b>Object</b> :  ' + event.name +
+            '<br><b>Event</b> :  ' + event.event_desc +
+            '<br><b>Address</b> :  ' + '' +
+            '<br><b>Position</b> :  ' + event.lat + ', ' + event.lng +
+            '<br><b>Altitude</b> :  ' + event.altitude +
+            '<br><b>Angle</b> :  ' + event.angle +
+            '<br><b>Speed</b> :  ' + event.speed + ' KM' +
+            '<br><b>Time</b> :  ' + event.dt_tracker
+        );
 
-		global.map.addLayer(marker);
-		marker.openPopup();
-		global.oldEventMarker = marker;
-	}
+        global.map.addLayer(marker);
+        marker.openPopup();
+        global.oldEventMarker = marker;
+    }
 }
 
 const displayToasterMessages = (event, index, autoHide) => {
-	message = `<div class="notification-header">New Event</div>
+    message = `<div class="notification-header">New Event</div>
 	<div class="notification-content">
 		<div class="row">
 			<div class="col-3">Object :</div>
@@ -174,75 +174,78 @@ const displayToasterMessages = (event, index, autoHide) => {
 			<div class="col-4"></div>
 			<div class="col-8">Show event</div>
 		</div>
-		
+
 	</div>`
-	var delayInMilliseconds = 0;
-	if (autoHide == true) {
-		delayInMilliseconds = (5000 + (index * 20))
-	}
-	showEventNotification(message, delayInMilliseconds)
+    var delayInMilliseconds = 0;
+    if (autoHide == true) {
+        delayInMilliseconds = (5000 + (index * 20))
+    }
+    showEventNotification(message, delayInMilliseconds)
 }
 
 const showEventNotification = (message, delayInMilliseconds) => {
-	toastr.options = {
-		"closeButton": true,
-		"newestOnTop": true,
-		"progressBar": true,
-		"positionClass": "toast-top-right",
-		"preventDuplicates": false,
-		"onclick": null,
-		"showDuration": "300",
-		"hideDuration": "1000",
-		"timeOut": delayInMilliseconds,
-		"extendedTimeOut": delayInMilliseconds,
-		"showEasing": "swing",
-		"hideEasing": "linear",
-		"showMethod": "fadeIn",
-		"hideMethod": "fadeOut",
-		"escapeHtml": false,
-	};
+    toastr.options = {
+        "closeButton": true,
+        "newestOnTop": true,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": delayInMilliseconds,
+        "extendedTimeOut": delayInMilliseconds,
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut",
+        "escapeHtml": false,
+    };
 
-	toastr.error(message);
+    toastr.error(message);
 }
 
 const showPopup = (index) => {
-	const popup = document.getElementById(`popup-${index}`);
-	// console.log(popup);
-	popup.style.display = 'block';
+    const popup = document.getElementById(`popup-${index}`);
+    // console.log(popup);
+    popup.style.display = 'block';
 }
 
 const hidePopup = (index) => {
-	const popup = document.getElementById(`popup-${index}`);
-	popup.style.display = 'none';
-	// console.log(popup);
+    const popup = document.getElementById(`popup-${index}`);
+    popup.style.display = 'none';
+    // console.log(popup);
 
 }
 
 const showWhatsappPopup = (index) => {
-	getGroupList();
-	let message = messageFormat(index);
-	ele('whatsapp-popup').click();
-	ele('event-message').value = message
+    getGroupList();
+    let message = messageFormat(index);
+    ele('whatsapp-popup').click();
+    ele('event-message').value = message
 }
 
 const messageFormat = (index) => {
 
-	let event = global.eventsData[index];
-	global.resolveEventId = event.event_id;
-	return `
-	<< DIGITRACK >>
+    let event = global.eventsData[index];
+    global.resolveEventId = event.event_id;
+    var url = encodeURIComponent(`https://maps.google.com/maps?q=${event.lat},${event.lng}&t=m`);
+    const formattedMessage = `
+    << DIGITRACK >>
 Name  : ${event.name}
 Event : ${event.event_desc}
 Date  : ${event.dt_tracker}
 Lat   : ${event.lat}
 Lng   : ${event.lng}
-GMAP  : https://maps.google.com/maps?q=${event.lat},${event.lng}&t=m
-	`;
+GMAP  : 'https://maps.google.com/maps?q=${event.lat},${event.lng}&t=m'
+`;
+
+    return formattedMessage;
 }
 
 const showResolvePopup = (event_id) => {
-	ele('resolve-popup').click();
-	global.resolveEventId = event_id;
+    ele('resolve-popup').click();
+    global.resolveEventId = event_id;
 }
 
 const scrollableDiv = document.getElementById('scrollableDiv');
@@ -251,26 +254,26 @@ let startX;
 let scrollLeft;
 
 scrollableDiv.addEventListener('mousedown', (e) => {
-	isMouseDown = true;
-	startX = e.pageX;
-	scrollLeft = scrollableDiv.scrollLeft;
-	scrollableDiv.style.cursor = 'grabbing'; // Change cursor while dragging
+    isMouseDown = true;
+    startX = e.pageX;
+    scrollLeft = scrollableDiv.scrollLeft;
+    scrollableDiv.style.cursor = 'grabbing'; // Change cursor while dragging
 });
 
 scrollableDiv.addEventListener('mouseleave', () => {
-	isMouseDown = false;
-	scrollableDiv.style.cursor = 'grab'; // Reset cursor when leaving the element
+    isMouseDown = false;
+    scrollableDiv.style.cursor = 'grab'; // Reset cursor when leaving the element
 });
 
 scrollableDiv.addEventListener('mouseup', () => {
-	isMouseDown = false;
-	scrollableDiv.style.cursor = 'grab'; // Reset cursor after releasing the mouse button
+    isMouseDown = false;
+    scrollableDiv.style.cursor = 'grab'; // Reset cursor after releasing the mouse button
 });
 
 scrollableDiv.addEventListener('mousemove', (e) => {
-	if (!isMouseDown) return;
-	e.preventDefault();
-	const x = e.pageX;
-	const walk = (x - startX) * 2; // Adjust scroll speed
-	scrollableDiv.scrollLeft = scrollLeft - walk;
+    if (!isMouseDown) return;
+    e.preventDefault();
+    const x = e.pageX;
+    const walk = (x - startX) * 2; // Adjust scroll speed
+    scrollableDiv.scrollLeft = scrollLeft - walk;
 });
