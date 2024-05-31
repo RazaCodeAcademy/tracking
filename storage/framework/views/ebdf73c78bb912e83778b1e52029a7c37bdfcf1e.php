@@ -442,10 +442,10 @@
 
 
 <!-- Tracking sidebar -->
-<div class="tracking-portion">
-    <div class="tracking-sidebar">
+<div class="tracking-portion" >
+    <div class="tracking-sidebar" id="draggable">
         <div class="tracking-controls">
-            <div class="track track-toggle-sidebar">
+            <div class="track track-toggle-sidebar" id="resize-handle">
                 <i class="fa fa-fw fa-outdent" aria-hidden="true"></i>
             </div>
             <div class="map__control-bar">
@@ -531,6 +531,7 @@
                             <input type="checkbox" id="checkboxAll" onclick="checkboxAll()" checked="true" />
                         </th>
                         <th scope="col" class="w-50">Tracker</th>
+                        <th scope="col" class="w-25">Group Name</th>
                         <th scope="col" class="w-25">Tracker Time</th>
                         <th scope="col" class="w-25">Server Time</th>
                     </tr>

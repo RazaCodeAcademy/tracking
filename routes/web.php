@@ -25,6 +25,8 @@ Route::get('/resolve-event', 'DashboardController@resolveEvent')->name('resolveE
 Route::get('/get-group-list', 'DashboardController@getGroupList')->name('getGroupList');
 Route::post('/send-message', 'DashboardController@sendMessage')->name('sendMessages');
 
+Route::get('/get-setting-object', 'DashboardController@getSettingObjects')->name('get.settings.object');
+
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
 Route::prefix('admin')->namespace('Backend')->group(function (){

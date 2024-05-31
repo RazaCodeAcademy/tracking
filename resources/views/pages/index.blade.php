@@ -9,48 +9,18 @@
         <div id="map"></div>
 
     </div>
-    <textarea name="" id="setting_object_data" cols="30" rows="10" style="display: none;">{{ json_encode($settingObjects) }}</textarea>
-    <textarea name="" id="object_data" cols="30" rows="10" style="display: none;">{{ $objects }}</textarea>
+    {{-- <textarea name="" id="setting_object_data" cols="30" rows="10" style="display: none;">{{ json_encode($settingObjects) }}</textarea>
+    <textarea name="" id="object_data" cols="30" rows="10" style="display: none;">{{ $objects }}</textarea> --}}
 @endsection
 
 @section('scripts')
     <script>
-        // load data when page is loaded
-        window.onload = () => {
-            setInterval(() => {
-                getObjectPlottingData();
-            }, 10000);
-
-            setInterval(() => {
-                getEventsData();
-            }, 30000);
-        }
-
         setTimeout(() => {
-            // displaySpinner();
             ele('search').value = '';
+            getGroupList();
 
-            objectPlotting(true);
             getEventsData();
-            // console.log('onload settimeout working');
-            // getObjectPlottingData();
         }, 1000);
-
-        // get object after 10 second and then plot on map
-        const getObjectSettingData = async () => {
-            try {
-                // console.log(response, 'setting');
-                global.settingObjectData = response ? JSON.parse(response) : null;
-                if (response) {
-                    // objectPlotting();
-                    getObjectPlottingData();
-
-
-                }
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        }
 
         // get object after 10 second and then plot on map
         const getObjectPlottingData = async () => {
@@ -60,13 +30,7 @@
                     type: "GET"
                 });
 
-                // console.log(response);
-
                 global.objectData = response ? JSON.parse(response) : null;
-
-
-
-                // console.log(response, 'setting');
 
                 if (global.objectData) {
                     objectPlotting();
@@ -194,7 +158,7 @@
 
                 if (data.length > 0) {
                     global.groupList = data;
-                    ele('group-id').value = data[0].id
+                    appendGroupList();
                 }
 
             } catch (error) {
@@ -205,12 +169,13 @@
         // send message data api to the whatsapp
         const sendMessage = async () => {
             try {
+                displaySpinner();
                 let to = ele('event-send-to').value;
                 let message = ele('event-message').value;
                 const response = await $.ajax({
                     url: `{{ route('sendMessages') }}`,
                     type: "POST",
-                    data:{
+                    data: {
                         message: message,
                         to: to,
                         last_id: global.resolveEventId
@@ -224,6 +189,7 @@
                     ele('message-event').click();
                     ele(global.resolveEventId).remove();
                     global.resolveEventId = '';
+                    hideSpinner();
                 }
 
             } catch (error) {
@@ -334,5 +300,73 @@
 
             getObjectHistoryData(data)
         }
+
+        //dragbale sidebar left
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const draggable = document.getElementById('draggable');
+
+            const resizeHandle = document.getElementById('resize-handle');
+
+            resizeHandle.addEventListener('mousedown', onMouseDown);
+
+            function onMouseDown(event) {
+                event.preventDefault();
+
+                let startX = event.clientX;
+                let startWidth = parseInt(document.defaultView.getComputedStyle(draggable).width, 10);
+
+                function onMouseMove(event) {
+                    let newWidth = startWidth + (event.clientX - startX);
+                    draggable.style.width = newWidth + 'px';
+                }
+
+                function onMouseUp() {
+                    document.removeEventListener('mousemove', onMouseMove);
+                    document.removeEventListener('mouseup', onMouseUp);
+                }
+
+                document.addEventListener('mousemove', onMouseMove);
+                document.addEventListener('mouseup', onMouseUp);
+            }
+
+            draggable.ondragstart = function() {
+                return false; // Prevent default drag and drop behavior
+            };
+        });
+
+        //dragbale sidebar right
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const draggable = document.getElementById('draggable-right');
+
+            const resizeHandle = document.getElementById('resize-handle-right');
+
+            resizeHandle.addEventListener('mousedown', onMouseDown);
+
+            function onMouseDown(event) {
+                event.preventDefault();
+
+                let startX = event.clientX;
+                let startWidth = parseInt(document.defaultView.getComputedStyle(draggable).width, 10);
+
+                function onMouseMove(event) {
+                    let diffX = event.clientX - startX;
+                    let newWidth = startWidth + diffX;
+                    draggable.style.width = newWidth + 'px';
+                    startX = event.clientX;;
+                }
+
+                function onMouseUp() {
+                    document.removeEventListener('mousemove', onMouseMove);
+                    document.removeEventListener('mouseup', onMouseUp);
+                }
+
+                document.addEventListener('mousemove', onMouseMove);
+                document.addEventListener('mouseup', onMouseUp);
+            }
+
+            draggable.ondragstart = function() {
+                return false; // Prevent default drag and drop behavior
+            };
+        });
     </script>
 @endsection

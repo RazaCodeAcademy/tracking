@@ -21,6 +21,72 @@ eventSidebarToggler.addEventListener("click", (e) => {
     eventSidebar.classList.toggle("show");
 });
 
+const appendGroupList = () => {
+    var html = '';
+    if (global.groupList.length > 0) {
+        global.groupList.forEach((group) => {
+            html += `
+            <a class="dropdown-item" href="#" onclick="bindDropdownItemClick()" data-value="${group.whatsapp_number}" data-tokens="${group.whatsapp_number}">${group.whatsapp_group}</a>
+
+            `;
+        })
+    }
+    ele('dropdownMenuItems').innerHTML = html;
+}
+
+const appendSettingObjectList = () => {
+    var html = '';
+    const deviceIds = Object.keys(global.settingObjectData);
+    deviceIds.forEach((deviceId) => {
+        const data = global.settingObjectData[deviceId];
+        html += `
+            <a class="dropdown-item" href="#" onclick="bindDropdownObjectItemClick()" data-value="${deviceId}" data-tokens="${deviceId}">${data[4]}</a>
+
+            `;
+    });
+    ele('dropdownObjectMenuItems').innerHTML = html;
+}
+
+$(document).ready(function () {
+    $('#dropdownSearch').on('input', function () {
+        var filter = $(this).val().toLowerCase();
+        $('#dropdownMenuItems a').filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(filter) > -1);
+        });
+    });
+
+    $('#dropdownObjectSearch').on('input', function () {
+        var filter = $(this).val().toLowerCase();
+        $('#dropdownObjectMenuItems a').filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(filter) > -1);
+        });
+    });
+});
+
+const bindDropdownItemClick = () => {
+    $('#dropdownMenuItems a').on('click', function () {
+        var selectedText = $(this).text();
+        var selectedValue = $(this).data('value');
+        console.log(selectedText, selectedValue);
+        $('#dropdownMenuButton').text(selectedText);
+        $('#event-send-to').val(selectedValue);
+        // $('#dropdownMenuButton').dropdown('toggle');
+        $('.dropdown-menu').css('display', 'none');
+    });
+}
+
+const bindDropdownObjectItemClick = () => {
+    $('#dropdownObjectMenuItems a').on('click', function () {
+        var selectedText = $(this).text();
+        var selectedValue = $(this).data('value');
+        console.log(selectedText, selectedValue);
+        $('#dropdownObjectMenuButton').text(selectedText);
+        $('#imei').val(selectedValue);
+        // $('#dropdownMenuButton').dropdown('toggle');
+        $('.dropdown-menu').css('display', 'none');
+    });
+}
+
 const appendEventData = (data, index) => {
     global.last_events_data[data.event_id] = data;
     var notify_system = data.notify_system.split(',');
@@ -247,33 +313,3 @@ const showResolvePopup = (event_id) => {
     ele('resolve-popup').click();
     global.resolveEventId = event_id;
 }
-
-const scrollableDiv = document.getElementById('scrollableDiv');
-let isMouseDown = false;
-let startX;
-let scrollLeft;
-
-scrollableDiv.addEventListener('mousedown', (e) => {
-    isMouseDown = true;
-    startX = e.pageX;
-    scrollLeft = scrollableDiv.scrollLeft;
-    scrollableDiv.style.cursor = 'grabbing'; // Change cursor while dragging
-});
-
-scrollableDiv.addEventListener('mouseleave', () => {
-    isMouseDown = false;
-    scrollableDiv.style.cursor = 'grab'; // Reset cursor when leaving the element
-});
-
-scrollableDiv.addEventListener('mouseup', () => {
-    isMouseDown = false;
-    scrollableDiv.style.cursor = 'grab'; // Reset cursor after releasing the mouse button
-});
-
-scrollableDiv.addEventListener('mousemove', (e) => {
-    if (!isMouseDown) return;
-    e.preventDefault();
-    const x = e.pageX;
-    const walk = (x - startX) * 2; // Adjust scroll speed
-    scrollableDiv.scrollLeft = scrollLeft - walk;
-});

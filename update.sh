@@ -14,7 +14,7 @@ client_folder="C:/Users/Taha/Desktop/Semantechs/LMS/Code/lmsOfficials_frontend"
 #MAIN SERVER
 host="67.223.118.27"
 username="pcllines786"
-port="21"
+port="22"
 
 # folder where projects are located on the server. Path without trailing slash
 upload_to_folder="/home/rentbwir/digitack.rentxs.com"

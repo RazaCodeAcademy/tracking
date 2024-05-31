@@ -3,6 +3,24 @@ const ele = (id) => {
     return document.getElementById(id);
 }
 
+const getFunctionObjectData = async () => {
+    let response = await $.ajax({
+        url: routes.funcObject,
+        type: "GET"
+    });
+    global.objectData = response ? JSON.parse(response) : null;
+    global.fitbounds = true;
+    await objectPlotting();
+    setInterval(() => {
+        getObjectPlottingData();
+    }, 10000);
+
+    setInterval(() => {
+        getEventsData();
+    }, 30000);
+
+}
+
 // icons urls
 const icons = {
     defaultMarkerUrl: "public/icons/markers/arrow_red.png",
@@ -43,7 +61,7 @@ const global = {
     startMarker: '',
     endMarker: '',
     markersByDeviceId: {},
-    oldEventMarker:'',
+    oldEventMarker: '',
 
     // data area
     settingObjectData: '',
@@ -59,11 +77,12 @@ const global = {
     itemsPerPage: 25,
     currentPage: 1,
     isShowLabel: false,
-    last_events_data:[],
-    event_last_id:'',
+    last_events_data: [],
+    event_last_id: '',
     isPolygonDisplayed: false,
-    resolveEventId:'',
-    groupList:[],
+    resolveEventId: '',
+    groupList: [],
+    fitbounds: false,
 
     // markers icons area
     defaultIcon: createMarkerIcon(20, 30, icons.defaultMarkerUrl),
@@ -94,14 +113,14 @@ const hideSpinner = () => {
 }
 
 // fetching data and parse it
-var setting_object_data = ele('setting_object_data').innerText;
-var object_data = ele('object_data').innerText;
-global.settingObjectData = dataParser(setting_object_data);
-global.objectData = dataParser(object_data);
+// var setting_object_data = ele('setting_object_data').innerText;
+// var object_data = ele('object_data').innerText;
+// global.settingObjectData = dataParser(setting_object_data);
+// global.objectData = dataParser(object_data);
 
 
 // Initialize the map outside of the loop
-global.map = L.map('map');
+global.map = L.map('map').setView([0, 0], 2);;
 
 // Add a tile layer (you can use other tile providers)
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -134,6 +153,11 @@ const makeMarker = (device) => {
     var lat = parseFloat(device.d[0][2]);
     var lng = parseFloat(device.d[0][3]);
 
+    if (isNaN(lat) || isNaN(lng)) {
+        console.warn(`Invalid coordinates for device: ${device.id}`);
+        return;
+    }
+
     // Create a marker and add it to the cluster group
     var marker = L.marker([lat, lng], {
         // icon: device.st == 'm' ? global.movingMarkerIcon : global.defaultIcon,
@@ -159,7 +183,7 @@ const makeMarker = (device) => {
         marker.bindTooltip(device.title, { permanent: true }).openTooltip();
     }
 
-    marker.addTo(global.markers)
+    marker.addTo(global.markers);
 
     setRotationAngle(marker, device.d[0][5]);
     if (global.isFocussed && device.id == global.focussedObjectId) {
@@ -189,38 +213,40 @@ const removeMarkerByTitle = (title) => {
 }
 
 // Object plotting code with marker clustering
-const objectPlotting = (fb = false) => {
+const objectPlotting = () => {
     // Clear existing markers
     global.markers.clearLayers();
-
     const deviceIds = Object.keys(global.objectData);
     const lastIndex = deviceIds.length - 1;
+
     // Function to make markers for a group of devices
     deviceIds.forEach((deviceId, index) => {
-        // console.log(lastIndex);
         var device = global.objectData[deviceId];
-        device.id = deviceId;
-        device.title = global.settingObjectData[deviceId][4]
-        var checkbox = ele(`checkbox-${deviceId}`);
-        var searchText = ele('search').value;
-        if (searchText.length > 0) {
-            var markerTitle = device.title.trim().toLowerCase();
-            if (markerTitle.includes(searchText.trim().toLowerCase())) {
-                makeMarker(device)
+        if (global.settingObjectData[deviceId]) {
+            device.id = deviceId;
+            device.title = global.settingObjectData[deviceId][4];
+            var checkbox = ele(`checkbox-${deviceId}`);
+            var searchText = ele('search').value;
+
+            if (searchText.length > 0) {
+                var markerTitle = device.title.trim().toLowerCase();
+                if (markerTitle.includes(searchText.trim().toLowerCase())) {
+                    makeMarker(device);
+                }
+            } else if (device.d[0] !== undefined && checkbox.checked) {
+                makeMarker(device);
             }
-        } else if (device.d[0] !== undefined && checkbox.checked) {
-            //&& checkbox.checked
-            makeMarker(device)
-        }
-        if (index === lastIndex) {
-            hideSpinner();
+
+            if (index === lastIndex) {
+                hideSpinner();
+                if (global.fitbounds == true) {
+                    global.map.fitBounds(global.markers.getBounds());
+                    global.fitbounds = false;
+                }
+            }
         }
     });
 
-    if (fb) {
-        // Fit the bounds of the marker cluster group on the map
-        global.map.fitBounds(global.markers.getBounds());
-    }
 };
 
 // check and uncheck object from the list
@@ -351,7 +377,7 @@ ele('zoomOutBtn').onclick = function () {
     global.map.zoomOut();
 };
 
-// marker add or remove 
+// marker add or remove
 const addOrRemoveMarker = (action, deviceId) => {
     // Extract the specific device
     var device = global.objectData[deviceId];
@@ -405,7 +431,6 @@ const addOrRemoveMarker = (action, deviceId) => {
             marker.addTo(global.map);
             return;
         }
-        console.log(marker);
         marker.setOpacity(1);
     } else if (action === 'remove') {
         // Remove marker if it exists
@@ -484,7 +509,7 @@ const unGroupClusters = () => {
     }, 500);
 }
 
-// Function to regroup clusters 
+// Function to regroup clusters
 const reGroupClusters = () => {
     // display a spinner
     displaySpinner();
@@ -579,9 +604,9 @@ const setObjectRoute = () => {
 }
 
 // clear polygon from the map
-const cleanPolygon = (show=false) => {
-    
-    if(show == true){
+const cleanPolygon = (show = false) => {
+
+    if (show == true) {
         console.log(global.markers);
         global.markers.addTo(global.map);
     }
@@ -636,7 +661,7 @@ const playRouteWithMarker = () => {
         var nextPosition = global.routeCoordinates[currentIndex + 1];
 
         if (nextPosition) {
-            var angle = getAngleBetweenPoints(currentPosition, {lat: nextPosition[0], lng: nextPosition[1]});
+            var angle = getAngleBetweenPoints(currentPosition, { lat: nextPosition[0], lng: nextPosition[1] });
             setRotationAngle(movingMarker, angle);
             // Reset index to 0 when it reaches the end
             if (currentIndex >= global.routeCoordinates.length - 1) {
@@ -650,3 +675,4 @@ const playRouteWithMarker = () => {
     // Start the animation
     movingMarker.start();
 }
+
