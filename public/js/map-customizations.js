@@ -231,9 +231,11 @@ const objectPlotting = () => {
             if (searchText.length > 0) {
                 var markerTitle = device.title.trim().toLowerCase();
                 if (markerTitle.includes(searchText.trim().toLowerCase())) {
+                    updateLeftSidebarData(device, deviceId);
                     makeMarker(device);
                 }
             } else if (device.d[0] !== undefined && checkbox.checked) {
+                updateLeftSidebarData(device, deviceId);
                 makeMarker(device);
             }
 
@@ -248,6 +250,13 @@ const objectPlotting = () => {
     });
 
 };
+
+// const update left sidebar data
+const updateLeftSidebarData = (device, deviceId) => {
+    ele(`${deviceId}_tracker_speed`).innerText = `${device.d[0][6]}kph`;
+    ele(`${deviceId}_tracker_time`).innerText = device.d[0][0];
+    ele(`${deviceId}_server_time`).innerText = device.d[0][1];
+}
 
 // check and uncheck object from the list
 const checkedObject = (deviceId) => {

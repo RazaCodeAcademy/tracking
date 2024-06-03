@@ -48,7 +48,7 @@ $(document).ready(function () {
                                 ${data[4]}
                             </p>
                             <div class="text-right">
-                                <span>${data[37] ? data[37] : 0}kph</span>
+                                <span id="${deviceId}_tracker_speed">${data[37] ? data[37] : 0}kph</span>
                                 <span ><img src="${icons.engineStart}" width="15"></span>
                                 <span ><img src="${icons.engineStop}" width="15"></span>
                                 <span ><img src="${icons.connectionOn}" width="15"></span>
@@ -64,14 +64,14 @@ $(document).ready(function () {
                     </td>
                     <td onclick="objectFocused(${deviceId})">
                         <div class="d-flex align-items-center justify-content-between">
-                            <p class="m-0">
+                            <p id="${deviceId}_tracker_time" class="m-0">
                                 ${data[35]}
                             </p>
                         </div>
                     </td>
                     <td onclick="objectFocused(${deviceId})" class="w-100">
                         <div class="d-flex justify-content-between">
-                            <span>${data[36]}</span>
+                            <span id="${deviceId}_server_time">${data[36]}</span>
 
                             <div class="dropdown ml-2">
                                 <span class=" dropdown-toggle" data-bs-toggle="dropdown" role="button"
