@@ -36,10 +36,10 @@ class DashboardController extends Controller
             return redirect()->route('login');
         }
 
-        // $settingObjects = [];
-        // $objects = [];
-        $settingObjects = $this->getSettingObjects();
-        $objects = $this->getObjects();
+        $settingObjects = [];
+        $objects = [];
+        // $settingObjects = $this->getSettingObjects();
+        // $objects = $this->getObjects();
         return view('pages.index', compact('settingObjects', 'objects'));
 
     }
@@ -106,8 +106,8 @@ class DashboardController extends Controller
         // Decode JSON response
         $decodedResponse = json_decode($response, true);
 
-        // Cache the response for 60 minutes (adjust the value as needed)
-        Cache::put($cacheName, $decodedResponse, 600);
+        // Cache the response for 15 minutes (adjust the value as needed)
+        Cache::put($cacheName, $decodedResponse, 900);
 
         return $decodedResponse;
     }
@@ -160,8 +160,10 @@ class DashboardController extends Controller
         // Close cURL session
         curl_close($ch);
 
-        // Cache the response for 60 minutes (adjust the value as needed)
-        Cache::put($cacheName, $response, 600);
+        if(!request()->ajax()){
+            // Cache the response for 15 minutes (adjust the value as needed)
+            Cache::put($cacheName, $response, 900);
+        }
         return $response;
     }
 
@@ -390,40 +392,52 @@ class DashboardController extends Controller
 
     public function getGroupList()
     {
-        $params=array(
-        'token' => 'ocp6656rjfypu760'
-        );
-        $curl = curl_init();
+        // Set the target URL
+        $url = env('APP_URL') . '/func/fn_settings.objects.php';
 
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.ultramsg.com/instance81487/groups?" .http_build_query($params),
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
-            CURLOPT_HTTPHEADER => array(
-                "content-type: application/x-www-form-urlencoded"
-            ),
-        ));
+        $postData = [
+            'cmd' => 'load_whatsapp_data',
+        ];
 
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
+        // Initialize cURL session
+        $ch = curl_init($url);
 
-        curl_close($curl);
+        // Set common cURL options
+        $commonOptions = [
+            CURLOPT_RETURNTRANSFER => true, // Return the response as a string instead of outputting it
+            CURLOPT_POST => true, // Set the request method to POST
+            CURLOPT_POSTFIELDS => $postData, // Set the POST data
+            CURLOPT_COOKIEJAR => storage_path('app/cookies.txt'), // Specify the file to save cookies in
+            CURLOPT_COOKIEFILE => storage_path('app/cookies.txt'), // Specify the file to read cookies from
+            CURLOPT_HTTPHEADER => [
+                'Access-Control-Allow-Origin: http://localhost', // Add any other headers if needed
+            ],
+            // CURLOPT_TIMEOUT => 15, // Set a timeout value in seconds
+        ];
 
-        if ($err) {
-            echo "cURL Error #:" . $err;
-        } else {
-            echo $response;
+        // Set common options for each cURL handle
+        foreach ($commonOptions as $option => $value) {
+            curl_setopt($ch, $option, $value);
         }
+
+        // Execute cURL session and get the response
+        $response = curl_exec($ch);
+
+        // Check for cURL errors
+        if (curl_errno($ch)) {
+            echo 'cURL error: ' . curl_error($ch);
+        }
+
+        // Close cURL session
+        curl_close($ch);
+
+        return $response;
     }
 
     public function sendMessage(Request $request)
     {
         $to = $request->to;
-        $clientId = "eyJpZCI6Ik1GVU1PTUpwYjJKd3hTS0ZZSURmaFVFM3RlZzZESEpZIiwiY2xpZW50X2lkIjoicmF6YSJ9";
+        $clientId = "eyJpZCI6IkthM3pvekRzbGttNnNTcVVOTTQ4UzJXVkc3dk9DRWVTIiwiY2xpZW50X2lkIjoiaml6YSA1In0=";
         $token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJNRlVNT01KcGIySnd4U0tGWUlEZmhVRTN0ZWc2REhKWSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzE2MjIzMTY1fQ.cuf9pb82nePCOwg1dovSnyyW2pcVrYgy-l2ulOm_aYo";
         $clientId = urlencode($clientId);
         $token = urlencode($token);
@@ -465,5 +479,4 @@ class DashboardController extends Controller
             return $response;
         }
     }
-
 }

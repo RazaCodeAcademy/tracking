@@ -1,10 +1,30 @@
 $(document).ready(function () {
     //-------------Pagination Area----------//
+    var totalPages;
     const tableId = 'data-container'; // Replace with the actual ID of your table element
-// Delegate click event to a parent element that exists when the page loads
+    // Delegate click event to a parent element that exists when the page loads
     $(document).on('click', '.dropdown-toggle', function () {
         $(this).next('.dropdown-menu').toggle();
     });
+
+    const getSettingObjectData = async () => {
+        displaySpinner();
+        let response = await $.ajax({
+            url: routes.settingObject,
+            type: "GET"
+        });
+        global.settingObjectData = response;
+        await appendRowGroup();
+        // Initial pagination setup
+        updatePagination();
+        appendSettingObjectList();
+        // Add pagination controls if needed
+    }
+
+    getSettingObjectData();
+    getFunctionObjectData();
+
+
     // Counter to keep track of the current group
     function appendRowGroup() {
         const deviceIds = Object.keys(global.settingObjectData);
@@ -28,7 +48,7 @@ $(document).ready(function () {
                                 ${data[4]}
                             </p>
                             <div class="text-right">
-                                <span>${data[37] ? data[37] : 0}kph</span>
+                                <span id="${deviceId}_tracker_speed">${data[37] ? data[37] : 0}kph</span>
                                 <span ><img src="${icons.engineStart}" width="15"></span>
                                 <span ><img src="${icons.engineStop}" width="15"></span>
                                 <span ><img src="${icons.connectionOn}" width="15"></span>
@@ -38,13 +58,20 @@ $(document).ready(function () {
                     <td onclick="objectFocused(${deviceId})">
                         <div class="d-flex align-items-center justify-content-between">
                             <p class="m-0">
+                                ${data[34]}
+                            </p>
+                        </div>
+                    </td>
+                    <td onclick="objectFocused(${deviceId})">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <p id="${deviceId}_tracker_time" class="m-0">
                                 ${data[35]}
                             </p>
                         </div>
                     </td>
                     <td onclick="objectFocused(${deviceId})" class="w-100">
                         <div class="d-flex justify-content-between">
-                            <span>${data[36]}</span>
+                            <span id="${deviceId}_server_time">${data[36]}</span>
 
                             <div class="dropdown ml-2">
                                 <span class=" dropdown-toggle" data-bs-toggle="dropdown" role="button"
@@ -52,7 +79,7 @@ $(document).ready(function () {
                                     aria-expanded="false">
                                     <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                                 </span>
-                        
+
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
                                     <li class="dropdown dropend">
                                         <a class="dropdown-item dropdown-toggle" href="#"
@@ -105,69 +132,52 @@ $(document).ready(function () {
             document.getElementById(tableId).appendChild(newRow);
         });
     }
-    appendRowGroup();
+
     function updatePagination() {
+        var totalRecords = $('tr.tracking-sidebar__content').length;
+        totalPages = Math.ceil(totalRecords / global.itemsPerPage);
         var start = (global.currentPage - 1) * global.itemsPerPage;
         var end = start + global.itemsPerPage;
 
-        // Hide all rows and show the ones for the current page
         $('tr.tracking-sidebar__content').hide().slice(start, end).show();
 
-        // Update the content based on the response
         var startIndex = (global.currentPage - 1) * global.itemsPerPage + 1;
         var endIndex = Math.min(startIndex + global.itemsPerPage - 1, totalRecords);
-        $('#pagination-info').text('Showing ' + startIndex + ' to ' + endIndex + ' of ' + totalRecords +
-            ' entries');
+        $('#pagination-info').text('Showing ' + startIndex + ' to ' + endIndex + ' of ' + totalRecords + ' entries');
 
-        // Remove previous pagination links
         $('#pagination').empty();
-
-        // Calculate the total number of pages
-        var totalPagesToShow = 3; // Display 3 pages
-
-        // Add "Previous" button
         $('#pagination').append('<li class="page-item"><a class="page-link" href="#">Previous</a></li>');
 
-        // Add pagination links dynamically
-        if (totalPages <= 6) {
-            // Display all pages if total pages are less than or equal to 6
-            for (var i = 1; i <= totalPages; i++) {
-                var pageLink = $('<li class="page-item"><a class="page-link" href="#">' + i + '</a></li>');
-                if (i === global.currentPage) {
-                    pageLink.addClass('active');
-                }
-                $('#pagination').append(pageLink);
-            }
-        } else {
-            // Display first 3 pages
-            for (var i = 1; i <= 3; i++) {
-                var pageLink = $('<li class="page-item"><a class="page-link" href="#">' + i + '</a></li>');
-                if (i === global.currentPage) {
-                    pageLink.addClass('active');
-                }
-                $('#pagination').append(pageLink);
-            }
+        // Calculate the range of pages to display
+        var pagesToShow = 3;
+        var startPage = Math.max(global.currentPage - 1, 1);
+        var endPage = Math.min(global.currentPage + 1, totalPages);
 
-            // Display ellipsis
-            $('#pagination').append('<li class="page-item disabled"><span class="page-link">...</span></li>');
-
-            // Display last 3 pages
-            for (var i = totalPages - 2; i <= totalPages; i++) {
-                var pageLink = $('<li class="page-item"><a class="page-link" href="#">' + i + '</a></li>');
-                if (i === global.currentPage) {
-                    pageLink.addClass('active');
-                }
-                $('#pagination').append(pageLink);
+        if (startPage > 1) {
+            $('#pagination').append('<li class="page-item"><a class="page-link" href="#">1</a></li>');
+            if (startPage > 2) {
+                $('#pagination').append('<li class="page-item disabled"><span class="page-link">...</span></li>');
             }
         }
 
-        // Add "Next" button
+        for (var i = startPage; i <= endPage; i++) {
+            var pageLink = $('<li class="page-item"><a class="page-link" href="#">' + i + '</a></li>');
+            if (i === global.currentPage) {
+                pageLink.addClass('active');
+            }
+            $('#pagination').append(pageLink);
+        }
+
+        if (endPage < totalPages) {
+            if (endPage < totalPages - 1) {
+                $('#pagination').append('<li class="page-item disabled"><span class="page-link">...</span></li>');
+            }
+            $('#pagination').append('<li class="page-item"><a class="page-link" href="#">' + totalPages + '</a></li>');
+        }
+
         $('#pagination').append('<li class="page-item"><a class="page-link" href="#">Next</a></li>');
     }
 
-    // Add pagination controls if needed
-    var totalRecords = $('tr.tracking-sidebar__content').length;
-    var totalPages = Math.ceil(totalRecords / global.itemsPerPage);
 
     // Handle pagination click event
     $('#pagination').on('click', 'a.page-link', function (e) {
@@ -176,18 +186,20 @@ $(document).ready(function () {
         var clickedPage = $(this).text();
 
         if (clickedPage === 'Next') {
-            global.currentPage = global.currentPage < totalPages ? global.currentPage + 1 : totalPages;
+            if (global.currentPage < totalPages) {
+                global.currentPage++;
+                updatePagination();
+            }
         } else if (clickedPage === 'Previous') {
-            global.currentPage = global.currentPage > 1 ? global.currentPage - 1 : 1;
+            if (global.currentPage > 1) {
+                global.currentPage--;
+                updatePagination();
+            }
         } else {
-            global.currentPage = parseInt(clickedPage) || global.currentPage;
+            global.currentPage = parseInt(clickedPage);
+            updatePagination();
         }
-
-        updatePagination();
     });
-
-    // Initial pagination setup
-    updatePagination();
 
     // Change event for items per page
     $('#items-per-page').change(function () {

@@ -1,8 +1,8 @@
 <!-- Tracking sidebar -->
 <div class="tracking-portion">
-    <div class="tracking-events-sidebar">
+    <div class="tracking-events-sidebar" id="draggable-right">
         <div class="tracking-controls">
-            <div class="track track-events-toggle-sidebar">
+            <div class="track track-events-toggle-sidebar" id="resize-handle-right">
                 <i class="fa fa-fw fa-outdent" aria-hidden="true"></i>
             </div>
         </div>
@@ -66,10 +66,23 @@
                                 <div class="modal-body">
                                     <form action="">
                                         <div class="row">
-                                            <div class="col-12">
+                                            <div class="col-12 mb-2">
                                                 <div class="form-group">
-                                                    <label for="">Phone Number</label>
-                                                    <input type="text" id="event-send-to" class="form-control">
+                                                    <div class="dropdown">
+                                                        <button class="py-2 dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            Select Group...
+                                                        </button>
+                                                        <div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
+                                                            <input type="text" class="form-control" id="dropdownSearch" placeholder="Search...">
+                                                            <div id="dropdownMenuItems">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <input type="hidden" id="event-send-to">
+                                                    {{-- <label for="">Select Group</label>
+                                                    <select class="form-control selectpicker" data-show-subtext="true" data-live-search="true" id="event-send-to">
+                                                    </select> --}}
                                                 </div>
 
                                             </div>
@@ -116,11 +129,23 @@
                         <div class="row my-2">
                             <div class="col-3">Object</div>
                             <div class="col-9">
-                                <select name="" id="imei" class="form-select">
+                                <div class="dropdown">
+                                    <button class="py-2 dropdown-toggle w-100" type="button" id="dropdownObjectMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Select Object...
+                                    </button>
+                                    <div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
+                                        <input type="text" class="form-control" id="dropdownObjectSearch" placeholder="Search...">
+                                        <div id="dropdownObjectMenuItems">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="imei">
+                                {{-- <select name="" id="imei" class="form-select">
                                     @foreach ($settingObjects as $key => $data)
                                         <option value="{{ $key }}" {{ $loop->iteration == 2 ? 'selected' : '' }}>{{ $data[4] }}</option>
                                     @endforeach
-                                </select>
+                                </select> --}}
                             </div>
                         </div>
                         <div class="row my-2">

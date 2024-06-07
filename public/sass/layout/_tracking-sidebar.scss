@@ -1,4 +1,16 @@
 .tracking-portion {
+    width: 150px;
+    height: 150px;
+    background-color: lightblue;
+    color: white;
+    text-align: center;
+    line-height: 150px; /* Centers text vertically */
+    position: absolute;
+    cursor: move; /* Indicates the div is draggable */
+    top: 100px;
+    left: 100px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .tracking-sidebar {

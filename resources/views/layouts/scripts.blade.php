@@ -17,10 +17,19 @@
 <script src="{{ asset('public/js/leaflet-realtime.min.js') }}"></script>
 <script src="{{ asset('public/js/leaflet-moving-marker.js') }}"></script>
 
+<script>
+    const routes = {
+        settingObject: "{{ route('get.settings.object') }}",
+        funcObject: "{{ route('getObjects') }}",
+    }
+</script>
+
 <!-- Custom JS -->
 <script src="{{ asset('public/js/map-customizations.js') }}"></script>
 <script src="{{ asset('public/js/main.js') }}"></script>
+
 <script src="{{ asset('public/js/pagination-and-search.js') }}"></script>
+@yield('scripts')
 
     <script>
         toastr.options = {
@@ -41,6 +50,6 @@
             "escapeHtml": false,
         };
 
+       
      </script>
 
-@yield('scripts')
