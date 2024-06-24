@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" href="{{ asset('public/img/appIcon.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('public/img/logo.jpeg') }}" type="image/x-icon">
 
     <link rel="stylesheet" href="{{ asset('public/login/fonts/icomoon/style.css') }}">
 
@@ -67,7 +67,7 @@
                 <div class="row align-items-center justify-content-center">
                     <div class="col-md-11">
                         <div class="mb-5 d-flex justify-content-center align-items-center">
-                            <img src="{{ asset('public/img/appIcon.png') }}" width="330" alt="">
+                            <img src="{{ asset('public/img/logo.jpeg') }}" width="150" alt="">
                         </div>
                         <h3>Login to <strong>Digitrack</strong></h3>
                         <!--<p class="mb-4">Lorem ipsum dolor sit amet elit. Sapiente sit aut eos consectetur adipisicing.-->

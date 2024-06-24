@@ -2,7 +2,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link rel="shortcut icon" href="<?php echo e(asset('public/img/appIcon.png')); ?>" type="image/x-icon">
+    <link rel="shortcut icon" href="<?php echo e(asset('public/img/logo.jpeg')); ?>" type="image/x-icon">
     <!-- Font Awesome 5 CSS -->
     <!-- <link rel="stylesheet" href="css/font-awesome-5/css/all.css" /> -->
     <!-- Font Awesome 4 CSS -->
