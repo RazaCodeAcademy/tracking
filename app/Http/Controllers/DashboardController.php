@@ -58,11 +58,11 @@ class DashboardController extends Controller
      */
     public function getSettingObjects()
     {
-        $cacheName = $this->PHPSESSID.'_setting_objects';
-        // Check if the data is already cached
-        if (Cache::has($cacheName)) {
-            return Cache::get($cacheName);
-        }
+        // $cacheName = $this->PHPSESSID.'_setting_objects';
+        // // Check if the data is already cached
+        // if (Cache::has($cacheName)) {
+        //     return Cache::get($cacheName);
+        // }
         // Set the target URL
         $url = env('APP_URL') . '/func/fn_settings.objects.php';
 
@@ -107,18 +107,18 @@ class DashboardController extends Controller
         $decodedResponse = json_decode($response, true);
 
         // Cache the response for 15 minutes (adjust the value as needed)
-        Cache::put($cacheName, $decodedResponse, 900);
+        // Cache::put($cacheName, $decodedResponse, 900);
 
         return $decodedResponse;
     }
 
     public function getObjects()
     {
-        $cacheName = $this->PHPSESSID.'_fn_objects';
-        // Check if the data is already cached
-        if (Cache::has($cacheName) && !request()->ajax()) {
-            return Cache::get($cacheName);
-        }
+        // $cacheName = $this->PHPSESSID.'_fn_objects';
+        // // Check if the data is already cached
+        // if (Cache::has($cacheName) && !request()->ajax()) {
+        //     return Cache::get($cacheName);
+        // }
 
         // Set the target URL
         $url = env('APP_URL') . '/func/fn_objects.php';
@@ -160,10 +160,10 @@ class DashboardController extends Controller
         // Close cURL session
         curl_close($ch);
 
-        if(!request()->ajax()){
-            // Cache the response for 15 minutes (adjust the value as needed)
-            Cache::put($cacheName, $response, 900);
-        }
+        // if(!request()->ajax()){
+        //     // Cache the response for 15 minutes (adjust the value as needed)
+        //     Cache::put($cacheName, $response, 900);
+        // }
         return $response;
     }
 
