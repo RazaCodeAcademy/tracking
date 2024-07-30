@@ -502,7 +502,7 @@ const updateFooter = (settingObject, object) => {
     ele('plate_no').innerText = settingObject[14]
     ele('odometer_type').innerText = settingObject[17]
     ele('engine_hour').innerText = settingObject[18]
-    ele('object_expire_date').innerText = settingObject[33]
+    // ele('object_expire_date').innerText = settingObject[33]
 
     // synopsis
     ele('server_date_time').innerText = object.d[0][0]
@@ -522,6 +522,9 @@ const updateFooter = (settingObject, object) => {
     ele('driver').innerText = object.d[0][0]
     ele('status').innerText = object.st
     ele('sn_protocol').innerText = object.p
+    ele('vehicle_status').innerText = object.st
+    ele('vehicle_stop').innerText = object.ststr
+    ele('vehicle_iddle').innerText = object.st == "i" ? "i" : ""
     // ele('odometer').innerText = object.d[0][0]
 }
 
