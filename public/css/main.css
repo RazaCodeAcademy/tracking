@@ -61,10 +61,17 @@ In media queries when using em or rems both units take root font size from brows
 but not takes root font size that we set earlier in the html selector definition
 here we're using ems because rems have some issues in different browsers when used in media qureies
 so 1em = 16px which is the browser's root font size
-so 
+so
 media-query-px / root-size-browser => 600px/16px = 37.5em
 
 */
+.leaflet-control-layers{
+    margin-right: 50px !important;
+
+}
+.leaflet-control-layers-toggle{
+    background-color: #5f0912 !important;
+}
 .form-control {
     padding: 0.42rem 0.75rem;
 }
@@ -273,7 +280,7 @@ button:focus {
     align-items: center;
 }
 .header__logo {
-    height: 3rem;
+    width: 15rem;
 }
 
 .user-info {
@@ -886,7 +893,7 @@ These files are meant to be just helpers which don’t output any CSS when compi
 Base: holds the boilerplate code for the project. Including standard styles such as resets and typographic rules,
 which are commonly used throughout your project.
 
-Components (or modules): holds all of your styles for buttons, carousels, sliders, and similar page components 
+Components (or modules): holds all of your styles for buttons, carousels, sliders, and similar page components
 (think widgets). Your project will typically contain a lot of component files — as the whole site/app should
 be mostly composed of small modules.
 
@@ -899,10 +906,10 @@ of your site to require page specific styles that no other page receives.
 Themes: this is likely not used in many projects. It would hold files that create project specific themes.
 For example if sections of your site contain alternate color schemes.
 
-Vendors: contains all third party code from external libraries and frameworks — such as Normalize, 
-Bootstrap, jQueryUI, etc. However, there is often a need to override vendor code. If this is required, 
-its good practice to create a new folder called vendors-extensions/ and then name any files after the 
-vendors they overwrite. The filevendors-extensions/_bootstrap.scss would contain all your Bootstrap 
+Vendors: contains all third party code from external libraries and frameworks — such as Normalize,
+Bootstrap, jQueryUI, etc. However, there is often a need to override vendor code. If this is required,
+its good practice to create a new folder called vendors-extensions/ and then name any files after the
+vendors they overwrite. The filevendors-extensions/_bootstrap.scss would contain all your Bootstrap
 overrides — as editing the vendor files themselves, isn’t generally a good idea.
 
 Main.scss: This file should only contain your imports!

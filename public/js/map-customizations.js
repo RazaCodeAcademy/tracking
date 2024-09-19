@@ -23,6 +23,8 @@ const getFunctionObjectData = async () => {
 
 // icons urls
 const icons = {
+    arrowRed: "public/icons/markers/arrow-red.png",
+    arrowGreen: "public/icons/markers/arrow-green.png",
     defaultMarkerUrl: "public/icons/markers/arrow_red.png",
     movingMarkerIcon: "public/icons/markers/arrow_green_1.png",
     startMarkerIcon: "public/icons/start-marker.png",
@@ -83,8 +85,11 @@ const global = {
     resolveEventId: '',
     groupList: [],
     fitbounds: false,
+    focusedZoomLevel: 15,
 
     // markers icons area
+    arrowRed: createMarkerIcon(20, 30, icons.arrowRed),
+    arrowGreen: createMarkerIcon(20, 30, icons.arrowGreen),
     defaultIcon: createMarkerIcon(20, 30, icons.defaultMarkerUrl),
     movingMarkerIcon: createMarkerIcon(20, 30, icons.movingMarkerIcon),
     startMarkerIcon: createMarkerIcon(80, 80, icons.startMarkerIcon),
@@ -123,9 +128,40 @@ const hideSpinner = () => {
 global.map = L.map('map').setView([0, 0], 2);;
 
 // Add a tile layer (you can use other tile providers)
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+// L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+//     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+//     // maxZoom: 18
+// }).addTo(global.map);
+// L.tileLayer('https://mt0.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}', {
+//     // attribution: '© OpenStreetMap contributors'
+// }).addTo(global.map);
+
+// Define the tile layers
+var openStreetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
-}).addTo(global.map);
+});
+
+var googleMaps = L.tileLayer('https://mt0.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}', {
+    attribution: 'Map data © Google'
+});
+
+var googleHybrid = L.tileLayer('http://mt0.google.com/vt/lyrs=y,traffic&hl=sl&x={x}&y={y}&z={z}', {
+    attribution: 'Map data © Google Hybrid'
+});
+
+
+// Add the OpenStreetMap layer to the map by default
+googleMaps.addTo(global.map);
+
+// Create an object with the layers for the control
+var baseLayers = {
+    "OpenStreetMap": openStreetMap,
+    "Google Street": googleMaps,
+    "Google Hybrid": googleHybrid,
+};
+
+// Add the layer control to the map
+L.control.layers(baseLayers).addTo(global.map);
 
 // Create a marker cluster group
 global.markers = L.markerClusterGroup({
@@ -163,7 +199,7 @@ const makeMarker = (device) => {
         // icon: device.st == 'm' ? global.movingMarkerIcon : global.defaultIcon,
         icon: L.divIcon({
             className: 'rotated-marker',
-            html: `<div class="arrow"><img src="${device.st == 'm' ? icons.movingMarkerIcon : icons.defaultMarkerUrl}" alt="Arrow Icon"></div>`,
+            html: `<div class="arrow"><img src="${device.st == 'm' ? icons.arrowGreen : icons.arrowRed}" alt="Arrow Icon"></div>`,
         }),
         title: device.title,
     });
@@ -171,7 +207,7 @@ const makeMarker = (device) => {
     // Bind a popup to the marker
     marker.bindPopup(
         '<b>Object</b> :  ' + device.title +
-        '<br><b>Position</b> :  ' + lat + ', ' + lng +
+        '<br><b>Position</b> :  ' + `<a target="_blank" href="https://maps.google.com/maps?q=${lat},${lng}&t=m'">${lat} , ${lng}</a>` +
         '<br><b>Altitude</b> :  ' + device.d[0][4] +
         '<br><b>Angle</b> :  ' + device.d[0][5] +
         '<br><b>Speed</b> :  ' + device.d[0][6] + ' KM' +
@@ -187,7 +223,8 @@ const makeMarker = (device) => {
 
     setRotationAngle(marker, device.d[0][5]);
     if (global.isFocussed && device.id == global.focussedObjectId) {
-        global.map.setView([lat, lng], 15);
+        global.focusedZoomLevel = global.map.getZoom()
+        global.map.setView([lat, lng], global.focusedZoomLevel);
     }
 }
 
@@ -348,7 +385,7 @@ const showCurrentLocation = () => {
 
                 // Create a marker for the current location
                 const currentLocationMarker = L.marker([latitude, longitude], {
-                    icon: global.defaultIcon,
+                    icon: global.arrowRed,
                     title: 'Current Location'
                 })
                     .addTo(global.map)  // Assuming `map` is your Leaflet map instance
@@ -421,7 +458,7 @@ const addOrRemoveMarker = (action, deviceId) => {
                 // icon: device.st == 'm' ? global.movingMarkerIcon : global.defaultIcon,
                 icon: L.divIcon({
                     className: 'rotated-marker',
-                    html: `<div class="arrow"><img src="${device.st == 'm' ? icons.movingMarkerIcon : icons.defaultMarkerUrl}" alt="Arrow Icon"></div>`,
+                    html: `<div class="arrow"><img src="${device.st == 'm' ? icons.arrowGreen : icons.arrowGreen}" alt="Arrow Icon"></div>`,
                 }),
                 title: device.title,
             });
@@ -465,7 +502,7 @@ const updateFooter = (settingObject, object) => {
     ele('plate_no').innerText = settingObject[14]
     ele('odometer_type').innerText = settingObject[17]
     ele('engine_hour').innerText = settingObject[18]
-    ele('object_expire_date').innerText = settingObject[33]
+    // ele('object_expire_date').innerText = settingObject[33]
 
     // synopsis
     ele('server_date_time').innerText = object.d[0][0]
@@ -485,6 +522,9 @@ const updateFooter = (settingObject, object) => {
     ele('driver').innerText = object.d[0][0]
     ele('status').innerText = object.st
     ele('sn_protocol').innerText = object.p
+    ele('vehicle_status').innerText = object.st
+    ele('vehicle_stop').innerText = object.ststr
+    ele('vehicle_iddle').innerText = object.st == "i" ? "i" : ""
     // ele('odometer').innerText = object.d[0][0]
 }
 

@@ -5,17 +5,17 @@
 
 <!-- Bootstrap 5.0 beta 2 -->
 <!-- Bootstrap Bundle with Popper -->
-<script src="{{ asset('public/js/bootstrap-5.0/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('public/toast/toastr.js') }}"></script>
-<script src="{{ asset('public/toast/toastr.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap-5.0/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('toast/toastr.js') }}"></script>
+<script src="{{ asset('toast/toastr.min.js') }}"></script>
 
 <!-- Leaflet JavaScript -->
-<script src="{{ asset('public/js/leaflet.js') }}"></script>
-<script src="{{ asset('public/js/leaflet.markercluster.js') }}"></script>
-<script src="{{ asset('public/js/leaflet.markercluster.layersupport.js') }}"></script>
-<script src="{{ asset('public/js/leaflet-routing-machine.js') }}"></script>
-<script src="{{ asset('public/js/leaflet-realtime.min.js') }}"></script>
-<script src="{{ asset('public/js/leaflet-moving-marker.js') }}"></script>
+<script src="{{ asset('js/leaflet.js') }}"></script>
+<script src="{{ asset('js/leaflet.markercluster.js') }}"></script>
+<script src="{{ asset('js/leaflet.markercluster.layersupport.js') }}"></script>
+<script src="{{ asset('js/leaflet-routing-machine.js') }}"></script>
+<script src="{{ asset('js/leaflet-realtime.min.js') }}"></script>
+<script src="{{ asset('js/leaflet-moving-marker.js') }}"></script>
 
 <script>
     const routes = {
@@ -25,10 +25,10 @@
 </script>
 
 <!-- Custom JS -->
-<script src="{{ asset('public/js/map-customizations.js') }}"></script>
-<script src="{{ asset('public/js/main.js') }}"></script>
+<script src="{{ asset('js/map-customizations.js') }}"></script>
+<script src="{{ asset('js/main.js') }}"></script>
 
-<script src="{{ asset('public/js/pagination-and-search.js') }}"></script>
+<script src="{{ asset('js/pagination-and-search.js') }}"></script>
 @yield('scripts')
 
     <script>
@@ -50,6 +50,6 @@
             "escapeHtml": false,
         };
 
-       
+
      </script>
 

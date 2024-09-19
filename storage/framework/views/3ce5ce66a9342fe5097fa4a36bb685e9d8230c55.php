@@ -8,7 +8,7 @@
             <div class="d-flex">
                 <div class="bottom-bar__white-space">
                     <div class="d-flex flex-column align-items-center justify-content-between h-100">
-                        <img class="mt-auto mb-auto opacity-50" src="{{ asset('public/img/logo.jpeg') }}" width="200" alt="logo image" />
+                        <img class="mt-auto mb-auto opacity-50" src="<?php echo e(asset('public/img/logo.png')); ?>" width="200" alt="logo image" />
                         <p class="p-2 m-0 text-center text-white bg-primary-dark w-100">
                             Copyright © 2021 Resq 911 Communication
                         </p>
@@ -86,18 +86,18 @@
                                     <div class="col-lg-4">
                                         <div class="bottom-bar__widget">
                                             <i class="fa fa-key fa-fw" aria-hidden="true"></i>
-                                            <span>Vehicle Status : </span>
-                                            <span id="vehicle_status"></span>
+                                            <span>Model : </span>
+                                            <span id="model"></span>
                                         </div>
                                         <div class="bottom-bar__widget">
                                             <i class="fa fa-book fa-fw" aria-hidden="true"></i>
-                                            <span>Vehicle Stop : </span>
-                                            <span id="vehicle_stop"></span>
+                                            <span>Vin : </span>
+                                            <span id="vin"></span>
                                         </div>
                                         <div class="bottom-bar__widget">
                                             <i class="fa fa-mobile fa-fw" aria-hidden="true"></i>
-                                            <span>Vehicle Iddle : </span>
-                                            <span id="vehicle_iddle"></span>
+                                            <span>Plate Number : </span>
+                                            <span id="plate_no"></span>
                                         </div>
                                         <div class="bottom-bar__widget">
                                             <i class="fa fa-mobile fa-fw" aria-hidden="true"></i>
@@ -112,35 +112,20 @@
                                             <span id="engine_hour"></span>
                                         </div>
                                         <div class="bottom-bar__widget">
-                                            <i class="fa fa-key fa-fw" aria-hidden="true"></i>
-                                            <span>Model : </span>
-                                            <span id="model"></span>
-                                        </div>
-                                        <div class="bottom-bar__widget">
-                                            <i class="fa fa-book fa-fw" aria-hidden="true"></i>
-                                            <span>Vin : </span>
-                                            <span id="vin"></span>
-                                        </div>
-                                        <div class="bottom-bar__widget">
-                                            <i class="fa fa-mobile fa-fw" aria-hidden="true"></i>
-                                            <span>Plate Number : </span>
-                                            <span id="plate_no"></span>
-                                        </div>
-                                        {{-- <div class="bottom-bar__widget">
                                             <i class="fa fa-question fa-fw" aria-hidden="true"></i>
                                             <span>Object Expire Date : </span>
                                             <span id="object_expire_date"></span>
-                                        </div> --}}
-                                        {{-- <div class="bottom-bar__widget">
+                                        </div>
+                                        <div class="bottom-bar__widget">
                                             <i class="fa fa-lock fa-fw" aria-hidden="true"></i>
                                             <span>Master Password</span>
                                         </div>
                                         <div class="bottom-bar__widget">
                                             <i class="fa fa-question fa-fw" aria-hidden="true"></i>
                                             <span>Security Question</span>
-                                        </div> --}}
+                                        </div>
                                     </div>
-
+                                  
                                 </div>
                             </div>
                         </div>
@@ -380,3 +365,4 @@
         </div>
     </div>
 </section>
+<?php /**PATH C:\xampp\htdocs\tracking\resources\views/layouts/footer.blade.php ENDPATH**/ ?>

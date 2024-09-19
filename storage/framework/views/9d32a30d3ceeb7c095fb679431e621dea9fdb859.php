@@ -4,12 +4,12 @@
         <div class="row align-items-center">
             <div class="col">
                 <a href="#">
-                    <img class="header__logo" src="{{ asset('img/logo.jpeg') }}" alt="logo" width="50" />
+                    <img class="header__logo" src="<?php echo e(asset('public/img/logo.png')); ?>" alt="logo" />
                 </a>
             </div>
             <div class="col">
                 <div class="user-info">
-                    {{-- <button class="theme-btn me-5" onclick="cleanPolygon(true)">Clean Polygon</button> --}}
+                    
                     <div class="notification dropdown me-5">
                         <button class="dropdown-toggle" type="button" id="dropdownMenuButton1"
                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -31,20 +31,20 @@
                     <div class="language dropdown me-5">
                         <button class="dropdown-toggle" type="button" id="dropdownMenuButton1"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="{{ asset('icons/english.png') }}" class="flag" alt="flag" /> English
+                            <img src="<?php echo e(asset('public/icons/english.png')); ?>" class="flag" alt="flag" /> English
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                             <li>
-                                <a class="dropdown-item" href="#"><img src="{{ asset('icons/english.png') }}"
+                                <a class="dropdown-item" href="#"><img src="<?php echo e(asset('public/icons/english.png')); ?>"
                                         class="language__figure" alt="flag" />
                                     English</a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#"><img src="{{ asset('icons/urdu.png') }}"
+                                <a class="dropdown-item" href="#"><img src="<?php echo e(asset('public/icons/urdu.png')); ?>"
                                         class="language__figure" alt="flag" /> Urdu</a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#"><img src="{{ asset('icons/arabic.png') }}"
+                                <a class="dropdown-item" href="#"><img src="<?php echo e(asset('public/icons/arabic.png')); ?>"
                                         class="language__figure" alt="flag" />
                                     Arabic</a>
                             </li>
@@ -69,7 +69,7 @@
                                     Settings</a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="{{ route('login') }}">
+                                <a class="dropdown-item" href="<?php echo e(route('login')); ?>">
                                     <span class="user-dropdown__icon--sm me-1">
                                         <i class="fa fa-sign-out fa-fw" aria-hidden="true"></i>
                                     </span>
@@ -82,3 +82,4 @@
         </div>
     </div>
 </header>
+<?php /**PATH C:\xampp\htdocs\tracking\resources\views/layouts/header.blade.php ENDPATH**/ ?>

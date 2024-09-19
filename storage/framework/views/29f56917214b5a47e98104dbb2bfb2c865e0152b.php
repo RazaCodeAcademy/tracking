@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{ asset('public/css/style.css') }}">
+    <link rel="stylesheet" href="<?php echo e(asset('public/css/style.css')); ?>">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <title>Hello, world!</title>
@@ -47,7 +47,7 @@
               </div>
     
               <div class="form-setting">
-                <form action="{{ route('post.login') }}" class="form" method="post">
+                <form action="<?php echo e(route('post.login')); ?>" class="form" method="post">
                     <img src="public/img/Untitled (1080 x 900 px).png" alt="">
                     <h2>Click Live <br> GPS Systems</h2>
                     <div class="form-align">
@@ -127,4 +127,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     -->
   </body>
-</html>
+</html><?php /**PATH C:\xampp\htdocs\tracking\resources\views/pages/login.blade.php ENDPATH**/ ?>

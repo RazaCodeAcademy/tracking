@@ -143,8 +143,9 @@ const checkDataLength = (data) => {
 }
 
 const appendHistoryData = (data, index) => {
+    let data1 = data;
     data = checkDataLength(data);
-    return `<tr class="tracking-events-sidebar__content cursor" onmouseover="showPopup(${index})" onmouseout="hidePopup(${index})" onclick="showEvent()">
+    return `<tr class="tracking-events-sidebar__content cursor" onmouseover="showPopup(${index})" onmouseout="hidePopup(${index})" onclick="showEvent(${data1.event_id})">
 		<td>
 			<div class="popup" id="popup-${index}">
 				<p>Route Length: ${index}</p>
@@ -190,6 +191,7 @@ const getHistoryData = () => {
 }
 
 const showEvent = (id) => {
+    console.log('asdfafafsaf')
     var event = global.last_events_data[id];
     if (global.oldEventMarker) {
         global.map.removeLayer(global.oldEventMarker);
