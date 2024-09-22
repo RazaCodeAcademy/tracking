@@ -64,6 +64,7 @@ const global = {
     endMarker: '',
     markersByDeviceId: {},
     oldEventMarker: '',
+    oldHistoryMarker: '',
 
     // data area
     settingObjectData: '',
@@ -692,36 +693,56 @@ const getAngleBetweenPoints = (latlng1, latlng2) => {
     return angle.toFixed(2);
 }
 
+let movingMarker = null; // Global reference to the marker
+let isPaused = false; // Track whether the route is paused
+
 const playRouteWithMarker = () => {
-    // Create a moving marker with the polyline coordinates and duration
-    var movingMarker = L.Marker.movingMarker(global.routeCoordinates, 500000, {
-        icon: L.divIcon({
-            className: 'rotated-marker',
-            html: `<div class="arrow"><img src="${icons.arrowBlue}" alt="Arrow Icon"></div>`,
-        }),
-        loop: false
-    }).addTo(global.map);
+    if (!movingMarker) {
+        // Create a moving marker if it doesn't already exist
+        movingMarker = L.Marker.movingMarker(global.routeCoordinates, 20000, {
+            icon: L.divIcon({
+                className: 'rotated-marker',
+                html: `<div class="arrow"><img src="${icons.arrowBlue}" alt="Arrow Icon"></div>`,
+            }),
+            loop: false // Set loop to false so it doesn't automatically restart
+        }).addTo(global.map);
 
-    var currentIndex = 0;
+        let currentIndex = 0;
 
-    // Update rotation angle on each move
-    movingMarker.on('move', function (e) {
-        var currentPosition = movingMarker.getLatLng();
-        var nextPosition = global.routeCoordinates[currentIndex + 1];
+        // Update the rotation angle on each move
+        movingMarker.on('move', function () {
+            const currentPosition = movingMarker.getLatLng();
+            const nextPosition = global.routeCoordinates[currentIndex + 1];
 
-        if (nextPosition) {
-            var angle = getAngleBetweenPoints(currentPosition, { lat: nextPosition[0], lng: nextPosition[1] });
-            setRotationAngle(movingMarker, angle);
-            // Reset index to 0 when it reaches the end
-            if (currentIndex >= global.routeCoordinates.length - 1) {
-                currentIndex = 0;
+            if (nextPosition) {
+                const angle = getAngleBetweenPoints(currentPosition, { lat: nextPosition[0], lng: nextPosition[1] });
+                setRotationAngle(movingMarker, angle);
             }
-        }
 
+            // Increment the index for the next position
+            currentIndex++;
+        });
 
-        currentIndex++;
-    });
-    // Start the animation
-    movingMarker.start();
-}
+        // Start the moving marker
+        movingMarker.start();
+    }
 
+    if (isPaused) {
+        // Resume the animation if it was paused
+        movingMarker.resume();
+        isPaused = false;
+    } else {
+        // Start the animation if it's not already running
+        movingMarker.start();
+        isPaused = false; // Ensure it's marked as not paused
+    }
+};
+
+// Function to pause the moving marker
+const pauseRouteWithMarker = () => {
+    if (movingMarker && !isPaused) {
+        // Pause the marker's movement
+        movingMarker.pause();
+        isPaused = true; // Mark it as paused
+    }
+};

@@ -23,6 +23,7 @@ Route::get('/get-object-history', 'DashboardController@getObjectHistory')->name(
 Route::get('/get-events-list', 'DashboardController@getEventsList')->name('getEventsList');
 Route::get('/resolve-event', 'DashboardController@resolveEvent')->name('resolveEvent');
 Route::get('/get-group-list', 'DashboardController@getGroupList')->name('getGroupList');
+Route::get('/get-zones-list', 'DashboardController@getZoneList')->name('getZoneList');
 Route::post('/send-message', 'DashboardController@sendMessage')->name('sendMessages');
 
 Route::get('/get-setting-object', 'DashboardController@getSettingObjects')->name('get.settings.object');

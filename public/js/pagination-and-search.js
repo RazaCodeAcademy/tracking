@@ -21,8 +21,10 @@ $(document).ready(function () {
         // Add pagination controls if needed
     }
 
-    getSettingObjectData();
-    getFunctionObjectData();
+    setTimeout(() => {
+        getSettingObjectData();
+        getFunctionObjectData();
+    }, 1000);
 
 
     // Counter to keep track of the current group
@@ -80,12 +82,12 @@ $(document).ready(function () {
                                     <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                                 </span>
 
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
+                                <ul class="dropdown-menu custom-dropdown" aria-labelledby="dropdownMenuLink">
                                     <li class="dropdown dropend">
                                         <a class="dropdown-item dropdown-toggle" href="#"
                                             id="multilevelDropdownMenu1" data-bs-toggle="dropdown"
                                             aria-haspopup="true" aria-expanded="false">Show History</a>
-                                        <ul class="dropdown-menu"
+                                        <ul class="dropdown-menu custom-dropdown"
                                             aria-labelledby="multilevelDropdownMenu1">
                                             <li class="dropdown dropend">
                                                 <a href="#" class="dropdown-item"

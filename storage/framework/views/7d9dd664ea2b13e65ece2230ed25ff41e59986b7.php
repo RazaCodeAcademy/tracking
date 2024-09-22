@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('title'); ?>
     Tracking | Dashboard
 <?php $__env->stopSection(); ?>
@@ -125,9 +123,8 @@
                     type: "GET",
                 });
 
-                var data = response ? JSON.parse(response) : null;
-
-                if (data.length > 0) {
+                if (response.length > 0) {
+                 var data = response ? JSON.parse(response) : [];
                     // console.log(data.length);
                     data.sort((a, b) => new Date(b.dt_tracker) - new Date(a.dt_tracker));
                     global.eventsData = data;
@@ -153,9 +150,8 @@
                     type: "GET",
                 });
 
-                var data = response ? JSON.parse(response) : null;
-
-                if (data.length > 0) {
+                if (response.length > 0) {
+                    var data = response ? JSON.parse(response) : null;
                     global.groupList = data;
                     appendGroupList();
                 }

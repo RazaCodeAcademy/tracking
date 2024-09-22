@@ -7,7 +7,7 @@
             </div>
         </div>
         <div class="tracking-events-sidebar__grid mb-3">
-            <ul class="nav nav-tabs">
+            <ul class="nav nav-tabs" id="left-sidebar">
                 <li class="nav-item">
                     <a class="nav-link active" href="#events">Events</a>
                 </li>
@@ -199,6 +199,10 @@
                                     class="btn btn-success">Show</button>
                                 <button type="button" id="hide-history" onclick="cleanPolygon(true)"
                                     class="btn btn-danger">Hide</button>
+                                <button type="button" id="hide-history" onclick="playRouteWithMarker()"
+                                    class="btn btn-info">Play</button>
+                                <button type="button" id="hide-history" onclick="pauseRouteWithMarker()"
+                                    class="btn btn-secondary">Pause</button>
                                 <button type="button" id="hide-history"
                                     class="btn btn-primary">Import/Export</button>
                             </div>
@@ -214,9 +218,7 @@
                                 <th scope="col">Information</th>
                             </tr>
                         </thead>
-                        <tbody id="history-data-container">
-
-                        </tbody>
+                        <tbody id="history-data-container"></tbody>
                     </table>
                 </div>
             </div>

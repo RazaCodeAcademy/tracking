@@ -8,57 +8,47 @@
             <div class="d-flex">
                 <div class="bottom-bar__white-space">
                     <div class="d-flex flex-column align-items-center justify-content-between h-100">
-                        <img class="mt-auto mb-auto opacity-50" src="<?php echo e(asset('public/img/logo.png')); ?>" width="200" alt="logo image" />
+                        <img class="mt-auto mb-auto opacity-50" src="<?php echo e(asset('public/img/logo.jpeg')); ?>" width="200" alt="logo image" />
                         <p class="p-2 m-0 text-center text-white bg-primary-dark w-100">
                             Copyright © 2021 Resq 911 Communication
                         </p>
                     </div>
                 </div>
                 <div class="bottom-bar__tracking">
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="overview-tab" data-bs-toggle="tab"
-                                data-bs-target="#overview" type="button" role="tab" aria-controls="home"
-                                aria-selected="true">
+                    <ul class="nav nav-tabs" id="footer-tabs">
+                        <li class="nav-item">
+                            <a href="#overview" class="nav-link active">
                                 Overview
-                            </button>
+                            </a>
                         </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="synopsis-tab" data-bs-toggle="tab" data-bs-target="#synopsis"
-                                type="button" role="tab" aria-controls="profile" aria-selected="false">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#synopsis">
                                 Synopsis
-                            </button>
+                        </a>
                         </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="vehicle-detail-tab" data-bs-toggle="tab"
-                                data-bs-target="#vehicle-detail" type="button" role="tab" aria-controls="contact"
-                                aria-selected="false">
+                        <li class="nav-item">
+                            <a href="#vehicle-detail" class="nav-link" >
                                 Vehicle-Detail
-                            </button>
+                            </a>
                         </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="contact-person-tab" data-bs-toggle="tab"
-                                data-bs-target="#contact-person" type="button" role="tab" aria-controls="contact"
-                                aria-selected="false">
+                        <li class="nav-item">
+                            <a href="#contact-person" class="nav-link">
                                 Contact Person
-                            </button>
+                            </a>
                         </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="services-tab" data-bs-toggle="tab" data-bs-target="#services"
-                                type="button" role="tab" aria-controls="contact" aria-selected="false">
+                        <li class="nav-item">
+                            <a href="#services" class="nav-link" >
                                 Services
-                            </button>
+                            </a>
                         </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="finance-tab" data-bs-toggle="tab" data-bs-target="#finance"
-                                type="button" role="tab" aria-controls="contact" aria-selected="false">
+                        <li class="nav-item">
+                            <a href="#finance" class="nav-link">
                                 Finance
-                            </button>
+                            </a>
                         </li>
                     </ul>
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="overview" role="tabpanel"
-                            aria-labelledby="overview-tab">
+                    <div class="bottom-bar__tracking">
+                        <div class="tab-content" id="overview">
                             <div class="bottom-bar__tab">
                                 <div class="row">
                                     <div class="col-lg-4">
@@ -86,18 +76,18 @@
                                     <div class="col-lg-4">
                                         <div class="bottom-bar__widget">
                                             <i class="fa fa-key fa-fw" aria-hidden="true"></i>
-                                            <span>Model : </span>
-                                            <span id="model"></span>
+                                            <span>Vehicle Status : </span>
+                                            <span id="vehicle_status"></span>
                                         </div>
                                         <div class="bottom-bar__widget">
                                             <i class="fa fa-book fa-fw" aria-hidden="true"></i>
-                                            <span>Vin : </span>
-                                            <span id="vin"></span>
+                                            <span>Vehicle Stop : </span>
+                                            <span id="vehicle_stop"></span>
                                         </div>
                                         <div class="bottom-bar__widget">
                                             <i class="fa fa-mobile fa-fw" aria-hidden="true"></i>
-                                            <span>Plate Number : </span>
-                                            <span id="plate_no"></span>
+                                            <span>Vehicle Iddle : </span>
+                                            <span id="vehicle_iddle"></span>
                                         </div>
                                         <div class="bottom-bar__widget">
                                             <i class="fa fa-mobile fa-fw" aria-hidden="true"></i>
@@ -112,24 +102,28 @@
                                             <span id="engine_hour"></span>
                                         </div>
                                         <div class="bottom-bar__widget">
-                                            <i class="fa fa-question fa-fw" aria-hidden="true"></i>
-                                            <span>Object Expire Date : </span>
-                                            <span id="object_expire_date"></span>
+                                            <i class="fa fa-key fa-fw" aria-hidden="true"></i>
+                                            <span>Model : </span>
+                                            <span id="model"></span>
                                         </div>
                                         <div class="bottom-bar__widget">
-                                            <i class="fa fa-lock fa-fw" aria-hidden="true"></i>
-                                            <span>Master Password</span>
+                                            <i class="fa fa-book fa-fw" aria-hidden="true"></i>
+                                            <span>Vin : </span>
+                                            <span id="vin"></span>
                                         </div>
                                         <div class="bottom-bar__widget">
-                                            <i class="fa fa-question fa-fw" aria-hidden="true"></i>
-                                            <span>Security Question</span>
+                                            <i class="fa fa-mobile fa-fw" aria-hidden="true"></i>
+                                            <span>Plate Number : </span>
+                                            <span id="plate_no"></span>
                                         </div>
+                                        
+                                        
                                     </div>
-                                  
+
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="synopsis" role="tabpanel" aria-labelledby="synopsis-tab">
+                        <div class="tab-content" id="synopsis" >
                             <div class="bottom-bar__tab">
                                 <div class="row">
                                     <div class="col-lg-4">
@@ -226,8 +220,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="vehicle-detail" role="tabpanel"
-                            aria-labelledby="vehicle-detail-tab">
+                        <div class="tab-content" id="vehicle-detail">
                             <div class="bottom-bar__tab">
                                 <div class="row">
                                     <div class="col-lg-4">
@@ -289,8 +282,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="contact-person" role="tabpanel"
-                            aria-labelledby="contact-person-tab">
+                        <div class="tab-content" id="contact-person">
                             <div class="bottom-bar__tab">
                                 <div class="row">
                                     <div class="col-lg-4">
@@ -313,7 +305,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="services" role="tabpanel" aria-labelledby="services-tab">
+                        <div class="tab-content" id="services">
                             <div class="bottom-bar__tab">
                                 <div class="row">
                                     <div class="col-lg-6">
@@ -331,7 +323,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="finance" role="tabpanel" aria-labelledby="finance-tab">
+                        <div class="tab-content" id="finance">
                             <div class="bottom-bar__tab">
                                 <div class="row">
                                     <div class="col-lg-4">

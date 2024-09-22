@@ -164,7 +164,7 @@ class DashboardController extends Controller
         //     // Cache the response for 15 minutes (adjust the value as needed)
         //     Cache::put($cacheName, $response, 900);
         // }
-        return $response;
+        return $response ? $response : [];
     }
 
     public function getObjectHistory(Request $request)
@@ -213,7 +213,7 @@ class DashboardController extends Controller
         // Close cURL session
         curl_close($ch);
 
-        return $response;
+        return $response ? $response : [];
     }
 
     public function getEventsList(Request $request)
@@ -262,7 +262,7 @@ class DashboardController extends Controller
         // Close cURL session
         curl_close($ch);
 
-        return $response;
+        return $response ? $response : [];
     }
 
     public function resolveEvent(Request $request)
@@ -311,7 +311,7 @@ class DashboardController extends Controller
         // Close cURL session
         curl_close($ch);
 
-        return $response;
+        return $response ? $response : [];
     }
 
     public function setCookieSession()
@@ -431,14 +431,14 @@ class DashboardController extends Controller
         // Close cURL session
         curl_close($ch);
 
-        return $response;
+        return $response ? $response : [];
     }
 
     public function sendMessage(Request $request)
     {
         $to = $request->to;
-        $clientId = "eyJpZCI6IkthM3pvekRzbGttNnNTcVVOTTQ4UzJXVkc3dk9DRWVTIiwiY2xpZW50X2lkIjoiaml6YSA1In0=";
-        $token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJNRlVNT01KcGIySnd4U0tGWUlEZmhVRTN0ZWc2REhKWSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzE2MjIzMTY1fQ.cuf9pb82nePCOwg1dovSnyyW2pcVrYgy-l2ulOm_aYo";
+        $clientId = "eyJpZCI6IlVZdU5QbWJJaXZlUGdVMU9Zek9DQ2JJTWxZNFBIRFhYIiwiY2xpZW50X2lkIjoiRXRxYW4ifQ==";
+        $token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiJVWXVOUG1iSWl2ZVBnVTFPWXpPQ0NiSU1sWTRQSERYWCIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzI2NDM1MTI3fQ.eI6YbR26-Zduw_ceZC9h7dXWnm_pnViwL4oJI_-Z-pA";
         $clientId = urlencode($clientId);
         $token = urlencode($token);
         $to = urlencode($to);

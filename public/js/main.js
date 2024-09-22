@@ -67,7 +67,6 @@ const bindDropdownItemClick = () => {
     $('#dropdownMenuItems a').on('click', function () {
         var selectedText = $(this).text();
         var selectedValue = $(this).data('value');
-        console.log(selectedText, selectedValue);
         $('#dropdownMenuButton').text(selectedText);
         $('#event-send-to').val(selectedValue);
         // $('#dropdownMenuButton').dropdown('toggle');
@@ -79,7 +78,6 @@ const bindDropdownObjectItemClick = () => {
     $('#dropdownObjectMenuItems a').on('click', function () {
         var selectedText = $(this).text();
         var selectedValue = $(this).data('value');
-        console.log(selectedText, selectedValue);
         $('#dropdownObjectMenuButton').text(selectedText);
         $('#imei').val(selectedValue);
         // $('#dropdownMenuButton').dropdown('toggle');
@@ -142,33 +140,60 @@ const checkDataLength = (data) => {
     }
 }
 
-const appendHistoryData = (data, index) => {
-    let data1 = data;
-    data = checkDataLength(data);
-    return `<tr class="tracking-events-sidebar__content cursor" onmouseover="showPopup(${index})" onmouseout="hidePopup(${index})" onclick="showEvent(${data1.event_id})">
-		<td>
-			<div class="popup" id="popup-${index}">
-				<p>Route Length: ${index}</p>
-				<p>Move Duration: ${index}</p>
-				<p>Stop Duration: ${index}</p>
-				<p>Top Speed: ${index}</p>
-				<p>Average Speed: ${index}</p>
-				<p>Engine Work: ${index}</p>
-				<p>Engine Idle: ${index}</p>
-			</div>
-			<img src="${data[0]}" width="30" />
-		</td>
-		<td>
-			<p class="m-0">
-				${data[1]}
-			</p>
-		</td>
-		<td>
-			${data[2]}
-		</td>
-	</tr>
-	`;
+const createHistoryEventObject = (data) => {
+    var len = data.length;
+    if (len == 8) { // events
+        return {
+            icon: icons.routeEvent,
+            lat: data[2],
+            long: data[3],
+        }
+    }
+    else if (len == 13) { // stops
+        return {
+            icon: icons.routeStop,
+            lat: data[2],
+            long: data[3],
+        }
+    }
 }
+
+const appendHistoryData = (data, index) => {
+    let event = createHistoryEventObject(data);
+    data = checkDataLength(data);
+
+    // Stringify the event object to pass as an argument
+    let eventString = JSON.stringify(event);
+
+    return `
+    <tr class="tracking-events-sidebar__content cursor"
+        onmouseover="showPopup(${index})"
+        onmouseout="hidePopup(${index})"
+        onclick='showHistoryEvent(${eventString})'>
+        <td>
+            <div class="popup" id="popup-${index}">
+            </div>
+            <img src="${data[0]}" width="30" />
+        </td>
+        <td>
+            <p class="m-0">
+             ${data[1]}
+            </p>
+        </td>
+        <td>
+            ${data[2]}
+        </td>
+    </tr>
+    `;
+    // <p>Route Length: ${index}</p>
+    // <p>Move Duration: ${index}</p>
+    // <p>Stop Duration: ${index}</p>
+    // <p>Top Speed: ${index}</p>
+    // <p>Average Speed: ${index}</p>
+    // <p>Engine Work: ${index}</p>
+    // <p>Engine Idle: ${index}</p>
+}
+
 
 const getHistoryData = () => {
     let imei = ele('imei').value;
@@ -191,7 +216,6 @@ const getHistoryData = () => {
 }
 
 const showEvent = (id) => {
-    console.log('asdfafafsaf')
     var event = global.last_events_data[id];
     if (global.oldEventMarker) {
         global.map.removeLayer(global.oldEventMarker);
@@ -216,6 +240,33 @@ const showEvent = (id) => {
         global.map.addLayer(marker);
         marker.openPopup();
         global.oldEventMarker = marker;
+    }
+}
+
+const showHistoryEvent = (data) => {
+    if (global.oldHistoryMarker) {
+        global.map.removeLayer(global.oldHistoryMarker);
+    }
+    if (data) {
+        var marker = L.marker([data.lat, data.long], {
+            icon: createMarkerIcon(30, 40, data.icon),
+            title: 'Event Display',
+        });
+
+        // marker.bindPopup(
+        //     '<b>Object</b> :  ' + 'event.name' +
+        //     '<br><b>Event</b> :  ' + 'event.event_desc' +
+        //     '<br><b>Address</b> :  ' + '' +
+        //     '<br><b>Position</b> :  ' + 'event.lat' + ', ' + 'event.lng' +
+        //     '<br><b>Altitude</b> :  ' + 'event.altitude' +
+        //     '<br><b>Angle</b> :  ' + 'event.angle' +
+        //     '<br><b>Speed</b> :  ' + 'event.speed' + ' KM' +
+        //     '<br><b>Time</b> :  ' + 'event.dt_tracker'
+        // );
+
+        global.map.addLayer(marker);
+        marker.openPopup();
+        global.oldHistoryMarker = marker;
     }
 }
 
