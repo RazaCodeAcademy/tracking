@@ -27,7 +27,7 @@
                             <span>Alerts</span>
                         </a>
                     </li>
-                    <li class="sub-navigation__item">
+                    {{-- <li class="sub-navigation__item">
                         <a href="#" class="sub-navigation__link">
                             <i class="fa fa-circle-o-notch fa-fw" aria-hidden="true"></i>
                             <span>Geo Boundaries</span>
@@ -62,10 +62,10 @@
                             <i class="fa fa-taxi fa-fw" aria-hidden="true"></i>
                             <span>NR Vehicles</span>
                         </a>
-                    </li>
+                    </li> --}}
                 </ul>
             </li>
-            <li class="navigation__item">
+            {{-- <li class="navigation__item">
                 <a href="#" class="navigation__link">
                     <i class="fa fa-headphones fa-fw" aria-hidden="true"></i>
                     <span>CRM</span>
@@ -159,8 +159,8 @@
                         </a>
                     </li>
                 </ul>
-            </li>
-            <li class="navigation__item">
+            </li> --}}
+            {{-- <li class="navigation__item">
                 <a href="#" class="navigation__link">
                     <i class="fa fa-shopping-cart fa-fw" aria-hidden="true"></i>
                     <span>Inventory</span>
@@ -266,7 +266,7 @@
                         </a>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
             <li class="navigation__item">
                 <a href="#" class="navigation__link">
                     <i class="fa fa-envelope-open fa-fw" aria-hidden="true"></i>
@@ -279,19 +279,19 @@
                             <span>SMS Logs</span>
                         </a>
                     </li>
-                    <li class="sub-navigation__item">
+                    {{-- <li class="sub-navigation__item">
                         <a href="#" class="sub-navigation__link">
                             <i class="fa fa-envelope fa-fw" aria-hidden="true"></i>
                             <span>Email Logs</span>
                         </a>
-                    </li>
+                    </li> --}}
                     <li class="sub-navigation__item">
                         <a href="#" class="sub-navigation__link">
                             <i class="fa fa-bell fa-fw" aria-hidden="true"></i>
                             <span>Commands Logs</span>
                         </a>
                     </li>
-                    <li class="sub-navigation__item">
+                    {{-- <li class="sub-navigation__item">
                         <a href="#" class="sub-navigation__link">
                             <i class="fa fa-list-alt fa-fw" aria-hidden="true"></i>
                             <span>SMS Location Logs</span>
@@ -302,7 +302,7 @@
                             <i class="fa fa-list-alt fa-fw" aria-hidden="true"></i>
                             <span>SMS/Email Templates</span>
                         </a>
-                    </li>
+                    </li> --}}
                 </ul>
             </li>
             <li class="navigation__item">
@@ -397,7 +397,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="navigation__item">
+            {{-- <li class="navigation__item">
                 <a href="#" class="navigation__link">
                     <i class="fa fa-user-circle fa-fw" aria-hidden="true"></i>
                     <span>Admin</span>
@@ -434,7 +434,7 @@
                         </a>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
         </ul>
     </nav>
 </aside>
@@ -531,9 +531,9 @@
                             <input type="checkbox" id="checkboxAll" onclick="checkboxAll()" checked="true" />
                         </th>
                         <th scope="col" class="w-50">Tracker</th>
-                        <th scope="col" class="w-25">Group Name</th>
+                        {{-- <th scope="col" class="w-25">Group Name</th> --}}
                         <th scope="col" class="w-25">Tracker Time</th>
-                        <th scope="col" class="w-25">Server Time</th>
+                        <th scope="col" class="w-25"></th>
                     </tr>
                 </thead>
                 <tbody id="data-container">

@@ -297,6 +297,8 @@
             }
 
             getObjectHistoryData(data)
+
+            return data;
         }
 
         //dragbale sidebar left

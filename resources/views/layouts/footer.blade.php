@@ -8,7 +8,7 @@
             <div class="d-flex">
                 <div class="bottom-bar__white-space">
                     <div class="d-flex flex-column align-items-center justify-content-between h-100">
-                        <img class="mt-auto mb-auto opacity-50" src="{{ asset('public/img/logo.jpeg') }}" width="200" alt="logo image" />
+                        <img class="mt-auto mb-auto opacity-50" src="{{ asset('public/img/logo.png') }}" width="200" alt="logo image" />
                         <p class="p-2 m-0 text-center text-white bg-primary-dark w-100">
                             Copyright © 2021 Resq 911 Communication
                         </p>
@@ -36,7 +36,7 @@
                                 Contact Person
                             </a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="#services" class="nav-link" >
                                 Services
                             </a>
@@ -45,7 +45,7 @@
                             <a href="#finance" class="nav-link">
                                 Finance
                             </a>
-                        </li>
+                        </li> --}}
                     </ul>
                     <div class="bottom-bar__tracking">
                         <div class="tab-content" id="overview">

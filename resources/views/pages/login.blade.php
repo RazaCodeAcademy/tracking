@@ -13,20 +13,6 @@
   </head>
   <body>
     
-    <!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-    <title>Hello, world!</title>
-  </head>
-  <body>
-    
     <div class="parent-container">
 
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -48,8 +34,8 @@
     
               <div class="form-setting">
                 <form action="{{ route('post.login') }}" class="form" method="post">
-                    <img src="public/img/Untitled (1080 x 900 px).png" alt="">
-                    <h2>Click Live <br> GPS Systems</h2>
+                    <img src="public/img/Untitled (1080 x 900 px).png" alt="" style="width: 80%; margin-left: 10%">
+                    {{-- <h2>Click Live <br> GPS Systems</h2> --}}
                     <div class="form-align">
                         <label for="">Username</label> <br>
                         <input class="spl" type="text" name="username" placeholder="Enter Your User"> <br>
@@ -64,7 +50,7 @@
     
                         <hr>
     
-                        <a href="#" class="member">Not a member yet?</a>
+                        {{-- <a href="#" class="member">Not a member yet?</a> --}}
                         
                         <div class="download-btn">
                             <img src="public/img/apple-store.png" alt="">

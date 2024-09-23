@@ -202,7 +202,9 @@ const getHistoryData = () => {
     let time_to = ele('time_to').value;
     let stops = ele('stops').value;
     if (filter) {
-        calculateTimeRange(imei, filter, stops);
+        const timeRange = calculateTimeRange(imei, filter, stops);
+        ele('time_from').value = timeRange.dtf;
+        ele('time_to').value = timeRange.dtt;
     } else {
         var data = {
             cmd: 'load_route_data',
@@ -267,6 +269,8 @@ const showHistoryEvent = (data) => {
         global.map.addLayer(marker);
         marker.openPopup();
         global.oldHistoryMarker = marker;
+
+        global.map.setView([data.lat, data.long], 15);
     }
 }
 

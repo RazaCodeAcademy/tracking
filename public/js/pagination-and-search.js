@@ -36,6 +36,17 @@ $(document).ready(function () {
             const newRow = document.createElement('tr');
             newRow.classList.add('tracking-sidebar__content', 'table-row');
 
+             // <td onclick="objectFocused(${deviceId})">
+                    //     <div class="d-flex align-items-center justify-content-between">
+                    //         <p class="m-0">
+                    //             ${data[34]}
+                    //         </p>
+                    //     </div>
+                    // </td>
+
+                            // <span id="${deviceId}_server_time">${data[36]}</span>
+
+
             newRow.innerHTML = `
                     <textarea name="" id="${deviceId}" cols="30" rows="10" class="d-none">${JSON.stringify(data)}</textarea>
                     <td scope="row">
@@ -57,13 +68,7 @@ $(document).ready(function () {
                             </div>
                         </div>
                     </td>
-                    <td onclick="objectFocused(${deviceId})">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <p class="m-0">
-                                ${data[34]}
-                            </p>
-                        </div>
-                    </td>
+                   
                     <td onclick="objectFocused(${deviceId})">
                         <div class="d-flex align-items-center justify-content-between">
                             <p id="${deviceId}_tracker_time" class="m-0">
@@ -73,7 +78,6 @@ $(document).ready(function () {
                     </td>
                     <td onclick="objectFocused(${deviceId})" class="w-100">
                         <div class="d-flex justify-content-between">
-                            <span id="${deviceId}_server_time">${data[36]}</span>
 
                             <div class="dropdown ml-2">
                                 <span class=" dropdown-toggle" data-bs-toggle="dropdown" role="button"

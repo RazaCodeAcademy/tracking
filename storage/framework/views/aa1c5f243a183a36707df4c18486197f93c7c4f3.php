@@ -27,246 +27,11 @@
                             <span>Alerts</span>
                         </a>
                     </li>
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-circle-o-notch fa-fw" aria-hidden="true"></i>
-                            <span>Geo Boundaries</span>
-                        </a>
-                    </li>
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-file fa-fw" aria-hidden="true"></i>
-                            <span>Reports</span>
-                        </a>
-                    </li>
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-balance-scale fa-fw" aria-hidden="true"></i>
-                            <span>Device Testing</span>
-                        </a>
-                    </li>
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-graduation-cap fa-fw" aria-hidden="true"></i>
-                            <span>Driver Management</span>
-                        </a>
-                    </li>
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-truck fa-fw" aria-hidden="true"></i>
-                            <span>Trailer Management</span>
-                        </a>
-                    </li>
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-taxi fa-fw" aria-hidden="true"></i>
-                            <span>NR Vehicles</span>
-                        </a>
-                    </li>
+                    
                 </ul>
             </li>
-            <li class="navigation__item">
-                <a href="#" class="navigation__link">
-                    <i class="fa fa-headphones fa-fw" aria-hidden="true"></i>
-                    <span>CRM</span>
-                </a>
-                <ul class="sub-navigation">
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-desktop fa-fw" aria-hidden="true"></i>
-                            <span>CRM Dashboard</span>
-                        </a>
-                    </li>
-                    <hr />
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-users fa-fw" aria-hidden="true"></i>
-                            <span>Staffs</span>
-                        </a>
-                    </li>
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-wrench fa-fw" aria-hidden="true"></i>
-                            <span>Technician</span>
-                        </a>
-                    </li>
-                    <hr />
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-building fa-fw" aria-hidden="true"></i>
-                            <span>Parties</span>
-                        </a>
-                    </li>
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-user fa-fw" aria-hidden="true"></i>
-                            <span>Users</span>
-                        </a>
-                    </li>
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-car fa-fw" aria-hidden="true"></i>
-                            <span>Vehicle</span>
-                        </a>
-                    </li>
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-object-group fa-fw" aria-hidden="true"></i>
-                            <span>Clusters</span>
-                        </a>
-                    </li>
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-bullhorn fa-fw" aria-hidden="true"></i>
-                            <span>Leads</span>
-                        </a>
-                    </li>
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-history fa-fw" aria-hidden="true"></i>
-                            <span>Vehicle History</span>
-                        </a>
-                    </li>
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-object-group fa-fw" aria-hidden="true"></i>
-                            <span>Groups</span>
-                        </a>
-                    </li>
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-certificate fa-fw" aria-hidden="true"></i>
-                            <span>Certificates</span>
-                        </a>
-                    </li>
-                    <hr />
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-file-text-o fa-fw" aria-hidden="true"></i>
-                            <span>Request Received</span>
-                        </a>
-                    </li>
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-comments-o fa-fw" aria-hidden="true"></i>
-                            <span>Complaints</span>
-                        </a>
-                    </li>
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>
-                            <span>Task Pending</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="navigation__item">
-                <a href="#" class="navigation__link">
-                    <i class="fa fa-shopping-cart fa-fw" aria-hidden="true"></i>
-                    <span>Inventory</span>
-                </a>
-                <ul class="sub-navigation">
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-desktop fa-fw" aria-hidden="true"></i>
-                            <span>Inventory Dashboard</span>
-                        </a>
-                    </li>
-                    <hr />
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-bullhorn fa-fw" aria-hidden="true"></i>
-                            <span>Requisition</span>
-                        </a>
-                    </li>
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-shopping-cart fa-fw" aria-hidden="true"></i>
-                            <span>Purchase Order</span>
-                        </a>
-                    </li>
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-address-card-o fa-fw" aria-hidden="true"></i>
-                            <span>GRN</span>
-                        </a>
-                    </li>
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-truck fa-fw" aria-hidden="true"></i>
-                            <span>Delivery Challan</span>
-                        </a>
-                    </li>
-                    <hr />
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-microchip fa-fw" aria-hidden="true"></i>
-                            <span>Resq Devices</span>
-                        </a>
-                    </li>
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-signal fa-fw" aria-hidden="true"></i>
-                            <span>SIM Cards</span>
-                        </a>
-                    </li>
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-random fa-fw" aria-hidden="true"></i>
-                            <span>Harness</span>
-                        </a>
-                    </li>
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-link fa-fw" aria-hidden="true"></i>
-                            <span>Device Sim Linking</span>
-                        </a>
-                    </li>
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-cart-plus fa-fw" aria-hidden="true"></i>
-                            <span>Assign Inventory</span>
-                        </a>
-                    </li>
-                    <hr />
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-male fa-fw" aria-hidden="true"></i>
-                            <span>Vendor</span>
-                        </a>
-                    </li>
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-microchip fa-fw" aria-hidden="true"></i>
-                            <span>Master Devices</span>
-                        </a>
-                    </li>
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-signal fa-fw" aria-hidden="true"></i>
-                            <span>Master SIM Cards</span>
-                        </a>
-                    </li>
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-random fa-fw" aria-hidden="true"></i>
-                            <span>Master Harness</span>
-                        </a>
-                    </li>
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-exchange fa-fw" aria-hidden="true"></i>
-                            <span>Warranty Claims</span>
-                        </a>
-                    </li>
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-users fa-fw" aria-hidden="true"></i>
-                            <span>Dealers</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
+            
+            
             <li class="navigation__item">
                 <a href="#" class="navigation__link">
                     <i class="fa fa-envelope-open fa-fw" aria-hidden="true"></i>
@@ -279,30 +44,14 @@
                             <span>SMS Logs</span>
                         </a>
                     </li>
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-envelope fa-fw" aria-hidden="true"></i>
-                            <span>Email Logs</span>
-                        </a>
-                    </li>
+                    
                     <li class="sub-navigation__item">
                         <a href="#" class="sub-navigation__link">
                             <i class="fa fa-bell fa-fw" aria-hidden="true"></i>
                             <span>Commands Logs</span>
                         </a>
                     </li>
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-list-alt fa-fw" aria-hidden="true"></i>
-                            <span>SMS Location Logs</span>
-                        </a>
-                    </li>
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-list-alt fa-fw" aria-hidden="true"></i>
-                            <span>SMS/Email Templates</span>
-                        </a>
-                    </li>
+                    
                 </ul>
             </li>
             <li class="navigation__item">
@@ -397,44 +146,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="navigation__item">
-                <a href="#" class="navigation__link">
-                    <i class="fa fa-user-circle fa-fw" aria-hidden="true"></i>
-                    <span>Admin</span>
-                </a>
-                <ul class="sub-navigation">
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-cogs fa-fw" aria-hidden="true"></i>
-                            <span>System Settings</span>
-                        </a>
-                    </li>
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-line-chart fa-fw" aria-hidden="true"></i>
-                            <span>Activity Logs</span>
-                        </a>
-                    </li>
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-tags fa-fw" aria-hidden="true"></i>
-                            <span>Logs</span>
-                        </a>
-                    </li>
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-random fa-fw" aria-hidden="true"></i>
-                            <span>Logs</span>
-                        </a>
-                    </li>
-                    <li class="sub-navigation__item">
-                        <a href="#" class="sub-navigation__link">
-                            <i class="fa fa-signal fa-fw" aria-hidden="true"></i>
-                            <span>SIM Histroy</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
+            
         </ul>
     </nav>
 </aside>
@@ -531,9 +243,9 @@
                             <input type="checkbox" id="checkboxAll" onclick="checkboxAll()" checked="true" />
                         </th>
                         <th scope="col" class="w-50">Tracker</th>
-                        <th scope="col" class="w-25">Group Name</th>
+                        
                         <th scope="col" class="w-25">Tracker Time</th>
-                        <th scope="col" class="w-25">Server Time</th>
+                        <th scope="col" class="w-25"></th>
                     </tr>
                 </thead>
                 <tbody id="data-container">

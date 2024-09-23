@@ -293,7 +293,7 @@ const objectPlotting = () => {
 const updateLeftSidebarData = (device, deviceId) => {
     ele(`${deviceId}_tracker_speed`).innerText = `${device.d[0][6]}kph`;
     ele(`${deviceId}_tracker_time`).innerText = device.d[0][0];
-    ele(`${deviceId}_server_time`).innerText = device.d[0][1];
+    // ele(`${deviceId}_server_time`).innerText = device.d[0][1];
 }
 
 // check and uncheck object from the list
