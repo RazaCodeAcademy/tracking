@@ -305,7 +305,7 @@
                     </li> --}}
                 </ul>
             </li>
-            <li class="navigation__item">
+            {{-- <li class="navigation__item">
                 <a href="#" class="navigation__link">
                     <i class="fa fa-usd fa-fw" aria-hidden="true"></i>
                     <span>Finance</span>
@@ -396,7 +396,7 @@
                         </a>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
             {{-- <li class="navigation__item">
                 <a href="#" class="navigation__link">
                     <i class="fa fa-user-circle fa-fw" aria-hidden="true"></i>
