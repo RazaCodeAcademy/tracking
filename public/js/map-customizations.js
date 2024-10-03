@@ -321,6 +321,7 @@ const objectFocused = (deviceId) => {
     var lng = parseFloat(markerData.d[0][3]);
 
     addOrRemoveMarker('add', deviceId);
+    show3dMapIframe(lat, lng);
 
     global.isFocussed = true;
     global.focussedObjectId = deviceId;
@@ -746,3 +747,11 @@ const pauseRouteWithMarker = () => {
         isPaused = true; // Mark it as paused
     }
 };
+
+const show3dMapIframe = (lat, lon) => {
+    const heading = 0;
+    const fov = 90;
+    const src = `https://www.google.com/maps/embed?pb=!1m0!4v1629468843264!6m8!1m7!1sCAoSLEFGMVFpcE5sSEc5V0U0QVp5aVplbFprOFd3YzNJaDd2OHBwdXpWWTRRRWh3!2m2!1d${lat}!2d${lon}!3f${heading}!4f0!5f${fov}`;
+    ele('street-view-iframe').src = src;
+    
+}

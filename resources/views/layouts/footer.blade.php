@@ -8,7 +8,8 @@
             <div class="d-flex">
                 <div class="bottom-bar__white-space">
                     <div class="d-flex flex-column align-items-center justify-content-between h-100">
-                        <img class="mt-auto mb-auto opacity-50" src="{{ asset('public/img/logo.png') }}" width="200" alt="logo image" />
+                        <img class="mt-auto mb-auto opacity-50" src="{{ asset('public/img/logo.png') }}" width="200"
+                            alt="logo image" />
                         <p class="p-2 m-0 text-center text-white bg-primary-dark w-100">
                             Copyright © 2021 Resq 911 Communication
                         </p>
@@ -24,16 +25,21 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#synopsis">
                                 Synopsis
-                        </a>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#vehicle-detail" class="nav-link" >
+                            <a href="#vehicle-detail" class="nav-link">
                                 Vehicle-Detail
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="#contact-person" class="nav-link">
                                 Contact Person
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#street-view" class="nav-link">
+                                Street View
                             </a>
                         </li>
                         {{-- <li class="nav-item">
@@ -134,7 +140,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-content" id="synopsis" >
+                        <div class="tab-content" id="synopsis">
                             <div class="bottom-bar__tab">
                                 <div class="row">
                                     <div class="col-lg-4">
@@ -330,6 +336,20 @@
                                             <i class="fa fa-bell" aria-hidden="true"></i>
                                             <span>Geofences Alert</span>
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-content" id="street-view">
+                            <div class="bottom-bar__tab">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="bottom-bar__widget">
+                                            <iframe width="710" height="150" style="border:0" loading="lazy" id="street-view-iframe"
+                                                allowfullscreen
+                                                src="">
+                                            </iframe>
+                                        </div>  
                                     </div>
                                 </div>
                             </div>
