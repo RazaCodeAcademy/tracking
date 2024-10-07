@@ -4,7 +4,7 @@
         <div class="row align-items-center">
             <div class="col">
                 <a href="#">
-                    <img class="header__logo" src="{{ asset('img/logo.jpeg') }}" alt="logo" width="50" />
+                    <img class="header__logo" src="{{ asset('public/img/logo.png') }}" alt="logo" width="50" />
                 </a>
             </div>
             <div class="col">
@@ -31,20 +31,20 @@
                     <div class="language dropdown me-5">
                         <button class="dropdown-toggle" type="button" id="dropdownMenuButton1"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="{{ asset('icons/english.png') }}" class="flag" alt="flag" /> English
+                            <img src="{{ asset('public/icons/english.png') }}" class="flag" alt="flag" /> English
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                             <li>
-                                <a class="dropdown-item" href="#"><img src="{{ asset('icons/english.png') }}"
+                                <a class="dropdown-item" href="#"><img src="{{ asset('public/icons/english.png') }}"
                                         class="language__figure" alt="flag" />
                                     English</a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#"><img src="{{ asset('icons/urdu.png') }}"
+                                <a class="dropdown-item" href="#"><img src="{{ asset('public/icons/urdu.png') }}"
                                         class="language__figure" alt="flag" /> Urdu</a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#"><img src="{{ asset('icons/arabic.png') }}"
+                                <a class="dropdown-item" href="#"><img src="{{ asset('public/icons/arabic.png') }}"
                                         class="language__figure" alt="flag" />
                                     Arabic</a>
                             </li>

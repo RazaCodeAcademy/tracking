@@ -4,7 +4,7 @@
         <div class="row align-items-center">
             <div class="col">
                 <a href="#">
-                    <img class="header__logo" src="<?php echo e(asset('public/img/logo.png')); ?>" alt="logo" />
+                    <img class="header__logo" src="<?php echo e(asset('public/img/logo.png')); ?>" alt="logo" width="50" />
                 </a>
             </div>
             <div class="col">

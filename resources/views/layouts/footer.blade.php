@@ -11,14 +11,19 @@
                         <img class="mt-auto mb-auto opacity-50" src="{{ asset('public/img/logo.png') }}" width="200"
                             alt="logo image" />
                         <p class="p-2 m-0 text-center text-white bg-primary-dark w-100">
-                            Copyright © 2021 Resq 911 Communication
+                            Copyright © {{ date('Y') }} Etqan
                         </p>
                     </div>
                 </div>
                 <div class="bottom-bar__tracking">
                     <ul class="nav nav-tabs" id="footer-tabs">
                         <li class="nav-item">
-                            <a href="#overview" class="nav-link active">
+                            <a href="#street-view" class="nav-link active">
+                                Street View
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#overview" class="nav-link">
                                 Overview
                             </a>
                         </li>
@@ -37,11 +42,7 @@
                                 Contact Person
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="#street-view" class="nav-link">
-                                Street View
-                            </a>
-                        </li>
+                        
                         {{-- <li class="nav-item">
                             <a href="#services" class="nav-link" >
                                 Services
@@ -54,6 +55,20 @@
                         </li> --}}
                     </ul>
                     <div class="bottom-bar__tracking">
+                        <div class="tab-content" id="street-view">
+                            <div class="bottom-bar__tab">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="bottom-bar__widget">
+                                            <iframe width="100%" height="250" style="border:0" loading="lazy" id="street-view-iframe"
+                                                allowfullscreen
+                                                src="">
+                                            </iframe>
+                                        </div>  
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="tab-content" id="overview">
                             <div class="bottom-bar__tab">
                                 <div class="row">
@@ -336,20 +351,6 @@
                                             <i class="fa fa-bell" aria-hidden="true"></i>
                                             <span>Geofences Alert</span>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-content" id="street-view">
-                            <div class="bottom-bar__tab">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="bottom-bar__widget">
-                                            <iframe width="710" height="150" style="border:0" loading="lazy" id="street-view-iframe"
-                                                allowfullscreen
-                                                src="">
-                                            </iframe>
-                                        </div>  
                                     </div>
                                 </div>
                             </div>
