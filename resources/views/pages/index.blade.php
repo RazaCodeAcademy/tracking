@@ -156,15 +156,9 @@
 
                 if (response.length > 0) {
                     var data = response ? JSON.parse(response) : [];
-                    console.log(data)
                     const zoneIds = Object.keys(data);
                     const lastIndex = zoneIds.length - 1;
-
                     plotZoneOnMap(data, zoneIds)
-                    // Function to make markers for a group of devices
-                    // zoneIds.forEach((zoneId, index) => {
-                    //     console.log(data[zoneId])
-                    // });
                 }
 
             } catch (error) {

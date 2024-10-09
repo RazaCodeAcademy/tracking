@@ -32,6 +32,7 @@ $(document).ready(function () {
         const deviceIds = Object.keys(global.settingObjectData);
         deviceIds.forEach((deviceId) => {
             const data = global.settingObjectData[deviceId];
+            const object = global.objectData[deviceId]
 
             const newRow = document.createElement('tr');
             newRow.classList.add('tracking-sidebar__content', 'table-row');
@@ -55,10 +56,10 @@ $(document).ready(function () {
                     <td onclick="objectFocused(${deviceId})">
                         <div class="d-flex align-items-center justify-content-between">
                             <p class="m-0 single-line">
-                                <span class="tracking-badge">
+                                <span id="${deviceId}_tracker_icon" class="tracking-badge ${global.getBGColor(object ? object.st : 's')}">
                                     <i class="fa fa-eye-slash" aria-hidden="true"></i>
                                 </span>
-                                ${data[4]}
+                                <span id="${deviceId}_tracker_name" class="${global.getTextColor(object ? object.st : 's')}">${data[4]}</span>
                             </p>
                             <div class="text-right">
                                 <span id="${deviceId}_tracker_speed">${data[37] ? data[37] : 0}kph</span>

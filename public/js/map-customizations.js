@@ -51,6 +51,53 @@ const createMarkerIcon = (h, w, url) => {
     });
 }
 
+const getBGColor = (status) => {
+    if(status == "m"){
+        return 'bg-success';
+    }else if(status == "s"){
+        return 'bg-danger';
+    }else if(status == "i"){
+        return 'bg-warning';
+    }
+    return 'bg-dark';
+}
+
+const getTextColor = (status) => {
+    if(status == "m"){
+        return 'text-success';
+    }else if(status == "s"){
+        return 'text-danger';
+    }else if(status == "i"){
+        return 'text-warning';
+    }
+    return 'text-dark';
+}
+
+const updateBGColor = (element, status) => {
+    // Find and remove any class that starts with 'bg-'
+    element.classList.forEach(className => {
+        if (className.startsWith('bg-')) {
+            element.classList.remove(className);
+        }
+    });
+
+    // Add the new background class
+    element.classList.add(global.getBGColor(status));
+}
+
+const updateTextColor = (element, status) => {
+    // Find and remove any class that starts with 'bg-'
+    element.classList.forEach(className => {
+        if (className.startsWith('text-')) {
+            element.classList.remove(className);
+        }
+    });
+
+    // Add the new background class
+    element.classList.add(global.getTextColor(status));
+}
+
+
 // global variables
 const global = {
     // map area
@@ -87,6 +134,12 @@ const global = {
     groupList: [],
     fitbounds: false,
     focusedZoomLevel: 15,
+
+    // functions initialized
+    getBGColor: getBGColor,
+    getTextColor: getTextColor,
+    updateBGColor:updateBGColor,
+    updateTextColor:updateTextColor,
     
    // zone area
    zoneLayer: L.layerGroup(), 
@@ -296,7 +349,10 @@ const objectPlotting = () => {
 const updateLeftSidebarData = (device, deviceId) => {
     ele(`${deviceId}_tracker_speed`).innerText = `${device.d[0][6]}kph`;
     ele(`${deviceId}_tracker_time`).innerText = device.d[0][0];
-    // ele(`${deviceId}_server_time`).innerText = device.d[0][1];
+    trackerIcon = ele(`${deviceId}_tracker_icon`);
+    trackerName = ele(`${deviceId}_tracker_name`);
+    global.updateBGColor(trackerIcon, device.st);
+    global.updateTextColor(trackerName, device.st);
 }
 
 // check and uncheck object from the list
