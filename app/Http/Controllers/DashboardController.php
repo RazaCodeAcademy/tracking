@@ -265,6 +265,51 @@ class DashboardController extends Controller
         return $response ? $response : [];
     }
 
+    public function getZoneList(Request $request)
+    {
+        // Set the target URL
+        $url = env('APP_URL') . '/func/fn_places.php';
+
+        // Prepare the POST data
+        $postData = [
+            'cmd' => 'load_zone_data'
+        ];
+
+        // Initialize cURL session
+        $ch = curl_init($url);
+
+        // Set common cURL options
+        $commonOptions = [
+            CURLOPT_RETURNTRANSFER => true, // Return the response as a string instead of outputting it
+            CURLOPT_POST => true, // Set the request method to POST
+            CURLOPT_POSTFIELDS => $postData, // Set the POST data
+            CURLOPT_COOKIEJAR => storage_path('app/cookies.txt'), // Specify the file to save cookies in
+            CURLOPT_COOKIEFILE => storage_path('app/cookies.txt'), // Specify the file to read cookies from
+            CURLOPT_HTTPHEADER => [
+                'Access-Control-Allow-Origin: http://localhost', // Add any other headers if needed
+            ],
+            // CURLOPT_TIMEOUT => 15, // Set a timeout value in seconds
+        ];
+
+        // Set common options for each cURL handle
+        foreach ($commonOptions as $option => $value) {
+            curl_setopt($ch, $option, $value);
+        }
+
+        // Execute cURL session and get the response
+        $response = curl_exec($ch);
+
+        // Check for cURL errors
+        if (curl_errno($ch)) {
+            echo 'cURL error: ' . curl_error($ch);
+        }
+
+        // Close cURL session
+        curl_close($ch);
+
+        return $response ? $response : [];
+    }
+
     public function resolveEvent(Request $request)
     {
         // Set the target URL

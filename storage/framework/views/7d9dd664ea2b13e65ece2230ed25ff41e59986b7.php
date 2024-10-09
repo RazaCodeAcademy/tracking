@@ -15,8 +15,9 @@
         setTimeout(() => {
             ele('search').value = '';
             getGroupList();
-
             getEventsData();
+            getZoneList();
+
         }, 1000);
 
         // get object after 10 second and then plot on map
@@ -124,7 +125,7 @@
                 });
 
                 if (response.length > 0) {
-                 var data = response ? JSON.parse(response) : [];
+                    var data = response ? JSON.parse(response) : [];
                     // console.log(data.length);
                     data.sort((a, b) => new Date(b.dt_tracker) - new Date(a.dt_tracker));
                     global.eventsData = data;
@@ -134,6 +135,33 @@
                         html += appendEventData(event, index);
                     })
                     ele('event-data-container').innerHTML = html + ele('event-data-container').innerHTML;
+                }
+
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        // get events data api
+        const getZoneList = async () => {
+            try {
+                const response = await $.ajax({
+                    url: `<?php echo e(route('getZoneList')); ?>`,
+                    type: "GET",
+                });
+
+
+                if (response.length > 0) {
+                    var data = response ? JSON.parse(response) : [];
+                    console.log(data)
+                    const zoneIds = Object.keys(data);
+                    const lastIndex = zoneIds.length - 1;
+
+                    plotZoneOnMap(data, zoneIds)
+                    // Function to make markers for a group of devices
+                    // zoneIds.forEach((zoneId, index) => {
+                    //     console.log(data[zoneId])
+                    // });
                 }
 
             } catch (error) {

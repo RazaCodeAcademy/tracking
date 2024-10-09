@@ -87,6 +87,9 @@ const global = {
     groupList: [],
     fitbounds: false,
     focusedZoomLevel: 15,
+    
+   // zone area
+   zoneLayer: L.layerGroup(), 
 
     // markers icons area
     arrowRed: createMarkerIcon(20, 30, icons.arrowRed),
@@ -756,3 +759,55 @@ const show3dMapIframe = (lat, lon) => {
     ele('street-view-iframe').src = src;
     document.querySelector(".bottom-bar").classList.add('show');
 }
+
+
+const plotZoneOnMap = (zoneData, zoneIds) => {
+    // Clear existing zones before plotting new ones
+    if (global.zoneLayer) {
+        global.map.removeLayer(global.zoneLayer);
+    }
+
+    // Create a layer group to hold the zone polygons
+    global.zoneLayer = L.layerGroup();
+
+    zoneIds.forEach(zoneId => {
+        let zone = zoneData[zoneId].data;
+        let zoneVisible = zoneData[zoneId].visible;
+        if (zone.vertices && zoneVisible) {
+            let coordinatesArray = zone.vertices.split(",");
+            let coordinatesPairs = [];
+            for (let i = 0; i < coordinatesArray.length; i += 2) {
+                let lat = parseFloat(coordinatesArray[i]);
+                let lng = parseFloat(coordinatesArray[i + 1]);
+                coordinatesPairs.push([lat, lng]);
+            }
+
+            const polygon = L.polygon(coordinatesPairs, {
+                color: zone.color || '#3388ff',
+                fillColor: zone.fillColor || '#3388ff',
+                fillOpacity: zone.fillOpacity || 0.5,
+            }).bindPopup(`<strong>Zone:</strong> ${zone.name}`);
+
+            global.zoneLayer.addLayer(polygon); // Add polygon to the layer group
+        }
+    });
+
+    // Add the layer group to the map
+    global.zoneLayer.addTo(global.map);
+
+    // Calculate bounds manually if getBounds is causing issues
+    let bounds = L.latLngBounds(); // Create a new LatLngBounds object
+
+    global.zoneLayer.eachLayer(layer => {
+        if (layer instanceof L.Polygon) {
+            bounds.extend(layer.getLatLngs()); // Extend bounds with each polygon's latLngs
+        }
+    });
+
+    // Use bounds to fit the map
+    if (bounds.isValid()) {
+        global.map.fitBounds(bounds);
+    } else {
+        console.warn("No valid bounds to fit for the map.");
+    }
+};
